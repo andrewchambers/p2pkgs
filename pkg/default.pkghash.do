@@ -18,6 +18,7 @@ builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
 redo-ifchange $rundephashes $builddephashes
 
 (
+  set -e
   echo sums
   test -s sha256sums && cat sha256sums
   echo files

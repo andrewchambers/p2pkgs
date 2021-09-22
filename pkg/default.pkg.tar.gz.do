@@ -65,6 +65,7 @@ chmod -R 777 .build/chroot
 
 
 binds=$(
+  set -e
   for toplevel in $(ls .build/chroot)
   do
     echo --bind .build/chroot/$toplevel $toplevel

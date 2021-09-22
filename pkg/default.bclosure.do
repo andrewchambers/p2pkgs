@@ -7,12 +7,12 @@ set -eux
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
-redo-ifchange .pkghash
+
+builddepclosures=$(cat build-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
+redo-ifchange .pkghash $builddepclosures
 (
+  set -e
   cat build-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
-  for f in $(cat build-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
-  do
-    cat $f
-  done
+  cat $builddepclosures
 ) | sort -u > $out
 redo-stamp < $out
