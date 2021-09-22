@@ -38,8 +38,10 @@ $ redo ./pkg/gcc/.pkg.tar.gz
 
 ### Build caching
 
-Because we have a hermetic package hash for each package, this is easy, we simply 
-check https://$cache/$hash.tar.gz before performing a build. Populating the cache
-is a matter of just copying the built tarballs into place on any http server.
+WIP:
 
-To make things even faster, we will probably add a client side server index.
+We simply check https://$cache/$pkghash.tar.gz before performing a build.
+
+Populating the cache is a matter of just copying the built tarballs into place on any http server.
+
+To make things even faster, we will add a client side server index that is a simple redo target.
