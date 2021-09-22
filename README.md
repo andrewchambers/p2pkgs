@@ -9,7 +9,7 @@ You need [bwrap](https://github.com/containers/bubblewrap) to run the build sand
 ## Building a package
 
 ```
-$ redo ./pkg/make/.pkg.tar.gz
+$ redo-ifchange ./pkg/make/.pkg.tar.gz
 ...
 
 # View runtime dependencies
