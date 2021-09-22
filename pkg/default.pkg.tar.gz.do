@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # Build a package build dependencies, then build the package itself.
+# Builds are performed in a sandbox and can't access the host system or the internet.
 
 set -eux
 exec 1>&2
