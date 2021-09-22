@@ -15,3 +15,4 @@ redo-ifchange .pkghash
     cat $f
   done
 ) | sort -u > $out
+redo-stamp < $out

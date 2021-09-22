@@ -15,3 +15,4 @@ redo-ifchange $depclosures
   cat $depclosures
   cat $pkgdir/run-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
 ) | sort -u > $out
+redo-stamp < $out
