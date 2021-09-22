@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# Compute a deterministic hash id for the given package
-# based on its dependencies that can be used for build caching.
+# Compute a deterministic cryptographic hash id for the given package.
+# The hash is based on the full depdenency tree and can be 
+# used for build caching.
 
 set -eux
 
