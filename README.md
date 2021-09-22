@@ -45,3 +45,11 @@ We simply check https://$cache/$pkghash.tar.gz before performing a build.
 Populating the cache is a matter of just copying the built tarballs into place on any http server.
 
 To make things even faster, we will add a client side server index that is a simple redo target.
+
+
+## ./bin/do
+
+Instead of redo, you can use the bootstrap 'do' script, which is a pure sh
+implementation of redo, it does not support incremental builds, but should
+be able to build one off packages.
+
