@@ -14,6 +14,6 @@ redo-ifchange .pkghash $builddepclosures
 (
   set -e
   cat build-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
-  cat $builddepclosures
+  cat $builddepclosures < /dev/null
 ) | sort -u > $out
 redo-stamp < $out

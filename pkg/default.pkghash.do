@@ -40,16 +40,9 @@ redo-ifchange $rundephashes $builddephashes
           --files-from -
   fi
   echo run-deps
-  for f in $rundephashes
-  do
-    cat $f
-  done
+  cat $rundephashes < /dev/null
   echo build-deps
-  for f in $builddephashes
-  do
-    cat $f
-  done
-  echo $builddephashes
+  cat $builddephashes < /dev/null
 ) | sha256sum | cut -c -64 > $out
 
 redo-stamp < $out
