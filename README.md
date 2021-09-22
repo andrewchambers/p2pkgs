@@ -1,6 +1,6 @@
 # coolports
 
-A hermetic, from source, package tree for linux with transparent build caching... isn't that cool?
+A *simple*, *source based*, *hermetic* package system, that is *really* fast for cached packages.
 
 ## Getting started
 
@@ -14,11 +14,11 @@ $ redo ./pkg/gcc/.pkg.tar.gz
 
 ## How it works
 
-- The package tree is a build system.
+- The package tree is a redo based build system.
 - Each package has a few files:
   - ./pkg/$name/build-deps - A list of build dependencies.
   - ./pkg/$name/run-deps - A list of runtime dependencies.
-  - ./pkg/$name/build - The script executed in the build sandbox.
+  - ./pkg/$name/build - The build/install script executed in the build sandbox.
   - ./pkg/$name/url - A curl script of files to download.
   - ./pkg/$name/sha256sums - Validation sums for the download.
 - Each package has has a few computed targets:
