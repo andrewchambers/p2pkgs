@@ -1,6 +1,6 @@
 # coolports
 
-A *simple*, *source based*, *hermetic* package system, that is *really* fast for cached packages.
+A *simple*, *source based*, *hermetic* package system, that is *really fast* for cached packages... cool!
 
 ## Getting started
 

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Compute a deterministic cryptographic hash id for the given package.
-# The hash is based on the full depdenency tree and can be 
-# used for build caching.
+# The hash is based on the full depdenency tree and can be therefore
+# used for transparent build caching.
 
 set -eux
 
