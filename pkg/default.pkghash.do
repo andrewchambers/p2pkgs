@@ -24,7 +24,7 @@ redo-ifchange $rundephashes $builddephashes
   echo files
   if test -e files
   then
-    # XXX we need some normalized tar format
+    # XXX we need some canonical tar format
     # guaranteed to be the same for everyone.
     find ./files -print0 \
     | sort -z \
