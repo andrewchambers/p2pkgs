@@ -17,8 +17,13 @@ builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
 
 redo-ifchange $rundephashes $builddephashes
 
-# TODO we need to have invaldation when files changes.
-# this might not be possible with the current system.
+if test -e files
+then
+	# XXX detect creation? is it possible?
+	redo-ifchange $(find files -type f)
+else
+	redo-ifcreate files
+fi
 
 (
   set -e
