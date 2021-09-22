@@ -9,7 +9,13 @@ You need [bwrap](https://github.com/containers/bubblewrap) to run the build sand
 ## Building a package
 
 ```
-$ redo ./pkg/gcc/.pkg.tar.gz
+$ redo ./pkg/make/.pkg.tar.gz
+...
+
+# View runtime dependencies
+$ redo ./pkg/make/.closure
+$ cat ./pkg/make/.closure
+./pkg/libc-rt/.pkg.tar.gz
 ```
 
 ## How it works

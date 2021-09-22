@@ -3,7 +3,6 @@ set -eux
 tar -xf make*
 rm *.tar.gz
 cd make*
-export CC="x86_64-linux-musl-gcc -static"
 ./configure --prefix=""
 ./build.sh
 ./make install-strip
