@@ -10,6 +10,7 @@ cd $pkgdir
 
 builddepclosures=$(cat build-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
 redo-ifchange .pkghash $builddepclosures
+
 (
   set -e
   cat build-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath

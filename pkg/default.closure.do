@@ -7,6 +7,7 @@ set -eux
 out=$(realpath $3)
 pkgdir="$(dirname $(realpath $1))"
 cd $pkgdir
+
 redo-ifchange .pkghash
 depclosures=$(cat run-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
 redo-ifchange $depclosures
