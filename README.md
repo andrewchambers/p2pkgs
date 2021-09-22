@@ -34,13 +34,13 @@ $ cat ./pkg/make/.closure
     - Validation sums for the download.
 - Each package has has a few computed targets:
   - ./pkg/$name/.pkghash
-    - A unique hash representing this package, computed by hashing its dependency graph. Used for caching and avoiding building packages all together.
+    - A cryptographic hash representing this package, computed by hashing the *full* dependency graph.
   - ./pkg/$name/.closure
-    - A computed list of all the runtime dependencies of this package.
+    - A computed list containing the transitive runtime dependencies of this package.
   - ./pkg/$name/.bclosure
-    - A computed list of all the build time dependencies of this package.
+    - A computed list of all the transitive build time dependencies of this package.
   - ./pkg/$name/.pkg.tar.gz
-    - The actual package contents.
+    - The actual package contents once build.
 
 ### Build caching
 
