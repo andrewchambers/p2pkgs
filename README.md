@@ -16,13 +16,30 @@ $ redo ./pkg/gcc/.pkg.tar.gz
 
 - The package tree is a redo based build system.
 - Each package has a few files:
-  - ./pkg/$name/build-deps - A list of build dependencies.
-  - ./pkg/$name/run-deps - A list of runtime dependencies.
-  - ./pkg/$name/build - The build/install script executed in the build sandbox.
-  - ./pkg/$name/url - A curl script of files to download.
-  - ./pkg/$name/sha256sums - Validation sums for the download.
+  - ./pkg/$name/build-deps
+    - A list of build dependencies.
+  - ./pkg/$name/run-deps
+    - A list of runtime dependencies.
+  - ./pkg/$name/build
+    - The build/install script executed in the build sandbox.
+  - ./pkg/$name/url
+    - A curl script of files to download.
+  - ./pkg/$name/sha256sums
+    - Validation sums for the download.
 - Each package has has a few computed targets:
-  - ./pkg/$name/.pkghash - A unique hash representing this package, computed by hashing its dependency graph. Used for caching and avoiding building packages all together.
-  - ./pkg/$name/.closure - A computed list of all the runtime dependencies of this package.
-  - ./pkg/$name/.bclosure - A computed list of all the build time dependencies of this package.
-  - ./pkg/$name/.pkg.tar.gz - The actual package contents.
+  - ./pkg/$name/.pkghash
+    - A unique hash representing this package, computed by hashing its dependency graph. Used for caching and avoiding building packages all together.
+  - ./pkg/$name/.closure
+    - A computed list of all the runtime dependencies of this package.
+  - ./pkg/$name/.bclosure
+    - A computed list of all the build time dependencies of this package.
+  - ./pkg/$name/.pkg.tar.gz
+    - The actual package contents.
+
+### Build caching
+
+Because we have a hermetic package hash for each package, this is easy, we simply 
+check https://$cache/$hash.tar.gz before performing a build. Populating the cache
+is a matter of just copying the built tarballs into place on any http server.
+
+To make things even faster, we will probably add a client side server index.
