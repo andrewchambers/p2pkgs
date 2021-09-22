@@ -17,6 +17,9 @@ builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
 
 redo-ifchange $rundephashes $builddephashes
 
+# TODO we need to have invaldation when files changes.
+# this might not be possible with the current system.
+
 (
   set -e
   echo sums
