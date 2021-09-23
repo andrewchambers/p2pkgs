@@ -63,10 +63,10 @@ package.
 
 We gain:
 
-- Transparent build caching, by simply checking https://$cache/$pkghash.tar.gz before performing a build we can skip work.
+- Transparent build caching, by simply checking https://$cache/$pkghash.tar.gz before performing a build we can skip huge amounts redundant package builds.
 - Easy distributed builds by shipping package closures to remote servers.
 - Easy access to the source code of our entire system.
-- The ability to build all our packages from a tiny set of host dependencies.
+- The ability to quickly build all our packages from a tiny set of host dependencies.
 
 ## ./bin/do
 
