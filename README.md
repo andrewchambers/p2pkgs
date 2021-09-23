@@ -8,11 +8,16 @@ You need [bwrap](https://github.com/containers/bubblewrap) to run the build sand
 
 ## Running packages in a venv
 
+We support running packages in a container called a venv:
+
 ```
 $ ./bin/venv ./pkg/{make,seed}
-$ ./venv/bin/venv-run env -i PATH=/bin make --version
+$ ./venv/bin/venv-run make --version
 GNU Make 4.2
 ```
+
+The requested process is run in a linux user container with top level directories substituted for those
+in the requested packages, this allows very lightweight use of package environments.
 
 ## Building a package
 
@@ -39,6 +44,8 @@ $ cat ./pkg/make/.closure
     - A curl script of files to download.
   - ./pkg/$name/sha256sums
     - Validation sums for the download.
+  - ./pkg/$name/files
+    - An optional directory of files added to the build directory.
 - Each package has has a few computed targets:
   - ./pkg/$name/.pkghash
     - A cryptographic hash representing this package, computed by hashing the *full* dependency graph.
@@ -48,10 +55,6 @@ $ cat ./pkg/make/.closure
     - A computed list of all the transitive build time dependencies of this package.
   - ./pkg/$name/.pkg.tar.gz
     - The actual package contents once build.
-
-### Virtual environments
-
-The virtual environment runs your command in a container with / mounted, and the package / mounted over the top of that.
 
 ### Build caching
 

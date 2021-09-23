@@ -8,12 +8,12 @@ out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
 
-builddepclosures=$(cat build-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
+builddepclosures=$((test -e build-deps && cat build-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
 redo-ifchange .pkghash $builddepclosures
 
 (
   set -e
-  cat build-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
+  (test -e build-deps && cat build-deps) | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
   cat $builddepclosures < /dev/null
 ) | sort -u > $out
 redo-stamp < $out

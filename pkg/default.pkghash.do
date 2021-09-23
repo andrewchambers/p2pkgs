@@ -10,10 +10,24 @@ out="$(realpath $3)"
 pkgdir="$(dirname $(realpath $1))"
 cd $pkgdir
 
-redo-ifchange run-deps build-deps
+rundephashes=""
+builddephashes=""
 
-rundephashes=$(cat run-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
-builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
+if test -e run-deps
+then
+  redo-ifchange run-deps
+  rundephashes=$(cat run-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
+else
+  redo-ifcreate run-deps
+fi
+
+if test -e build-deps
+then
+  redo-ifchange build-deps
+  builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
+else
+  redo-ifcreate build-deps
+fi
 
 redo-ifchange $rundephashes $builddephashes
 
@@ -27,6 +41,7 @@ fi
 
 (
   set -e
+  echo rhash # Recursive hash tag, see seed/.pkghash.do for content hash.
   echo sums
   test -s sha256sums && cat sha256sums
   echo files
@@ -34,7 +49,7 @@ fi
   then
     # XXX we need some canonical tar format
     # guaranteed to be the same for everyone.
-    find ./files -print0 \
+    find ./files -print0 -type f \
     | sort -z \
     | tar -cf - \
           --format=posix \

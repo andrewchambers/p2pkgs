@@ -9,12 +9,12 @@ pkgdir="$(dirname $(realpath $1))"
 cd $pkgdir
 
 redo-ifchange .pkghash
-depclosures=$(cat run-deps | sed -e 's,$,/.closure,' | xargs -r realpath)
+depclosures=$((test -e run-deps && cat run-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
 redo-ifchange $depclosures
 
 (
   set -e
   cat $depclosures < /dev/null
-  cat run-deps | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
+  (test -e run-deps && cat run-deps) | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
 ) | sort -u > $out
 redo-stamp < $out
