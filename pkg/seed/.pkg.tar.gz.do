@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 curl \
   -L \
   -o $3 \

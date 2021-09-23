@@ -2,6 +2,8 @@
 
 set -ex
 
+parallel=8
+
 tar xf gcc-*
 tar xf gmp-*
 tar xf mpc-*
@@ -51,7 +53,7 @@ export CXXFLAGS_FOR_TARGET="$CXXFLAGS"
 	--with-build-sysroot=/ \
 	--with-debug-prefix-map="$PWD=" \
 	--with-native-system-header-dir=/include
-make BOOT_CFLAGS="$CFLAGS" BOOT_LDFLAGS="$LDFLAGS"
+make -j $parallel BOOT_CFLAGS="$CFLAGS" BOOT_LDFLAGS="$LDFLAGS"
 make INFO_DEPS= install
 cd "$DESTDIR/"
 find . '(' -name '*.py' -o -name '*.la' ')' -exec rm {} +

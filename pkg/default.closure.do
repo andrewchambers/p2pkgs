@@ -2,7 +2,7 @@
 
 # Compute the runtime closure of a package.
 
-set -eux
+set -eu
 
 out=$(realpath $3)
 pkgdir="$(dirname $(realpath $1))"

@@ -4,7 +4,7 @@
 # Builds are performed in a sandbox containing the package
 # build closure and can't access the host system or the internet.
 
-set -eux
+set -eu
 exec 1>&2
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))

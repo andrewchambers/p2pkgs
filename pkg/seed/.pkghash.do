@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eux
+set -eu
 redo-ifchange .pkg.tar.gz
 (
   set -e
