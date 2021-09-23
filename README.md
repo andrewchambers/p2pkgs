@@ -6,6 +6,13 @@ A *simple*, *source based*, *hermetic* package system, that is *really fast* for
 
 You need [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox and [redo](https://github.com/apenwarr/redo) to execute the build rules.
 
+## Running packages in a venv
+
+```
+$ ./bin/venv ./pkg/{make,seed}
+$ ./venv/bin/venv-run env -i PATH=/bin make --version
+```
+
 ## Building a package
 
 ```
@@ -18,12 +25,7 @@ $ cat ./pkg/make/.closure
 ./pkg/libc-rt/.pkg.tar.gz
 ```
 
-## Running a virtual environment
 
-```
-$ ./bin/venv ./pkg/seed
-$ ./venv/bin/venv-run env -i PATH=/bin gcc --version
-```
 
 ## How it works
 

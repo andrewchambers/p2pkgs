@@ -32,13 +32,15 @@ mkdir "$out"
 for tar in $tars
 do
   tar -C "$out" -xzf "$tar"
+  # XXX temporary work around for permissions.
+  chmod -R +w+r "$out"
 done
 
 mkdir -p "$out/bin"
 cat <<EOF  > "$out/bin/venv-run"
 #!/bin/sh
 
-set -ex
+set -eu
 
 unset host_binds
 unset venv_binds
