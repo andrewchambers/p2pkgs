@@ -32,7 +32,9 @@ $ cat ./pkg/make/.closure
 
 ## How it works
 
-- The package tree is a redo based build system.
+- The package tree is a *just* redo based build system, this means it is
+  simple and flexible.
+- Packages are built isolated from everything except declared dependencies.
 - Each package has a few files:
   - ./pkg/$name/build-deps
     - A list of build dependencies.
@@ -58,8 +60,7 @@ $ cat ./pkg/make/.closure
 
 So what is the point?
 
-The .pkghash represents each package as a merkle tree encapsulating all dependencies, we can use this as a cache tag and immutable id for that
-package.
+Once we have a .pkghash that represents each package and encapsulates the entire dependency tree we can now use this as a cache tag and immutable id for that package.
 
 We gain:
 
@@ -67,10 +68,3 @@ We gain:
 - Easy distributed builds by shipping package closures to remote servers.
 - Easy access to the source code of our entire system.
 - The ability to quickly build all our packages from a tiny set of host dependencies.
-
-## ./bin/do
-
-Instead of redo, you can use the bootstrap 'do' script, which is a pure sh
-implementation of redo, it does not support incremental builds, but should
-be able to build one off packages.
-
