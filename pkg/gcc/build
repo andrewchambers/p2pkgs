@@ -2,7 +2,7 @@
 
 set -ex
 
-parallel=8
+parallel=32
 
 tar xf gcc-*
 tar xf gmp-*
@@ -54,7 +54,7 @@ export CXXFLAGS_FOR_TARGET="$CXXFLAGS"
 	--with-debug-prefix-map="$PWD=" \
 	--with-native-system-header-dir=/include
 make -j $parallel BOOT_CFLAGS="$CFLAGS" BOOT_LDFLAGS="$LDFLAGS"
-make INFO_DEPS= install
+make INFO_DEPS= install-strip
 cd "$DESTDIR/"
 find . '(' -name '*.py' -o -name '*.la' ')' -exec rm {} +
 for bin in cc c++ g++ gcc; do

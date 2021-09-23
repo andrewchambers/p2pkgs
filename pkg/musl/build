@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eux
+
+tar -xf *
+rm *.tar.*
+cd musl*
+./configure --prefix="/"
+make
+make install

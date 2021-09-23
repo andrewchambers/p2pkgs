@@ -4,7 +4,7 @@
 # The hash is based on the full depdenency tree and can be therefore
 # used for transparent build caching.
 
-set -eux
+set -eu
 
 out="$(realpath $3)"
 pkgdir="$(dirname $(realpath $1))"
@@ -29,7 +29,7 @@ else
   redo-ifcreate build-deps
 fi
 
-redo-ifchange $rundephashes $builddephashes
+redo-ifchange build $rundephashes $builddephashes
 
 if test -e files
 then
@@ -44,6 +44,8 @@ fi
   echo rhash # Recursive hash tag, see seed/.pkghash.do for content hash.
   echo sums
   test -s sha256sums && cat sha256sums
+  echo build
+  cat build
   echo files
   if test -e files
   then
