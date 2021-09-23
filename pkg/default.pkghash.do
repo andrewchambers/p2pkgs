@@ -17,6 +17,14 @@ builddephashes=$(cat build-deps | sed -e 's,$,/.pkghash,' | xargs -r realpath)
 
 redo-ifchange $rundephashes $builddephashes
 
+if test -e files
+then
+	# XXX detect creation? is it possible?
+	redo-ifchange $(find files -type f)
+else
+	redo-ifcreate files
+fi
+
 (
   set -e
   echo sums
@@ -40,16 +48,9 @@ redo-ifchange $rundephashes $builddephashes
           --files-from -
   fi
   echo run-deps
-  for f in $rundephashes
-  do
-    cat $f
-  done
+  cat $rundephashes < /dev/null
   echo build-deps
-  for f in $builddephashes
-  do
-    cat $f
-  done
-  echo $builddephashes
+  cat $builddephashes < /dev/null
 ) | sha256sum | cut -c -64 > $out
 
 redo-stamp < $out
