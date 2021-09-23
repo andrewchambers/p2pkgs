@@ -11,7 +11,7 @@ You need [bwrap](https://github.com/containers/bubblewrap) to run the build sand
 We support running packages in a container called a venv:
 
 ```
-$ ./bin/venv ./pkg/{make,seed}
+$ ./bin/venv ./pkg/{make,oksh,gnu-base}
 $ ./venv/bin/venv-run make --version
 GNU Make 4.2
 ```
