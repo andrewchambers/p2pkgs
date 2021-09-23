@@ -18,6 +18,13 @@ $ cat ./pkg/make/.closure
 ./pkg/libc-rt/.pkg.tar.gz
 ```
 
+## Running a virtual environment
+
+```
+$ ./bin/venv ./pkg/seed
+$ ./venv/bin/venv-run env -i PATH=/bin gcc --version
+```
+
 ## How it works
 
 - The package tree is a redo based build system.

@@ -1,0 +1,63 @@
+#!/bin/sh
+
+set -eux
+
+out=$(realpath ./venv)
+pkgs=$@
+
+if test -e "$out"
+then
+  echo "$out already exists"
+  exit 1
+fi
+
+redo-ifchange $(
+  set -e
+  for pkg in $pkgs
+  do
+    echo "$pkg/.pkg.tar.gz"
+  done
+)
+
+tars="$(
+  set -e
+  for pkg in $pkgs
+  do
+    echo $pkg/.pkg.tar.gz
+    cat $pkg/.closure
+  done | sort -u
+)"
+
+mkdir "$out"
+for tar in $tars
+do
+  tar -C "$out" -xzf "$tar"
+done
+
+mkdir -p "$out/bin"
+cat <<EOF  > "$out/bin/venv-run"
+#!/bin/sh
+
+set -ex
+
+unset host_binds
+unset venv_binds
+
+for b in \$(ls /)
+do
+  host_binds+=(--dev-bind "/\$b" "/\$b")
+done
+
+for b in \$(ls "$out")
+do
+  venv_binds+=(--dev-bind "$out/\$b" "/\$b")
+done
+
+exec bwrap \\
+  "\${host_binds[@]}" \\
+  "\${venv_binds[@]}" \\
+  --chdir "\$PWD" \\
+  -- "\$@"
+EOF
+
+chmod +x "$out/bin/venv-run"
