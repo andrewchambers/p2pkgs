@@ -56,16 +56,17 @@ $ cat ./pkg/make/.closure
   - ./pkg/$name/.pkg.tar.gz
     - The actual package contents once build.
 
-### Build caching
+So what is the point?
 
-WIP:
+The .pkghash represents each package as a merkle tree encapsulating all dependencies, we can use this as a cache tag and immutable id for that
+package.
 
-We simply check https://$cache/$pkghash.tar.gz before performing a build.
+We gain:
 
-Populating the cache is a matter of just copying the built tarballs into place on any http server.
-
-To make things even faster, we will add a client side server index that is a simple redo target.
-
+- Transparent build caching, by simply checking https://$cache/$pkghash.tar.gz before performing a build we can skip work.
+- Easy distributed builds by shipping package closures to remote servers.
+- Easy access to the source code of our entire system.
+- The ability to build all our packages from a tiny set of host dependencies.
 
 ## ./bin/do
 
