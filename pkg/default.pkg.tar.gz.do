@@ -9,16 +9,16 @@ exec 1>&2
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
-redo-ifchange .pkghash .bclosure
-redo-ifchange $(cat .bclosure)
+redo-ifchange .pkghash .bclosure .closure
+redo-ifchange $(cat .closure) $(cat .bclosure)
 
 mkdir -p .fetch
 cd .fetch
 if test -s ../sha256sums
 then
-  if ! sha256sum -c ../sha256sums
+  if ! sha256sum -c ../sha256sums > /dev/null 2>&1
   then
-    test -s ../url && curl -LK ../url
+    test -s ../fetch && curl -LK ../fetch
     sha256sum -c ../sha256sums
     # TODO error on files not in list.
   fi

@@ -28,7 +28,7 @@ $ cat ./pkg/make/.closure
     - A list of runtime dependencies.
   - ./pkg/$name/build
     - The build/install script executed in the build sandbox.
-  - ./pkg/$name/url
+  - ./pkg/$name/fetch
     - A curl script of files to download.
   - ./pkg/$name/sha256sums
     - Validation sums for the download.
