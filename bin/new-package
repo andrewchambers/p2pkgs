@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -eu
+
+out="$1"
+
+if test -e "$1"
+then
+  echo "$out already exists" 1>&2
+  exit 1
+fi
+
+mkdir "$out"
+touch "$out/run-deps"
+touch "$out/build-deps"
+cat <<EOF > "$out/build"
+#!/bin/sh
+set -eux
+exit 1
+EOF
+chmod +x "$out/build"

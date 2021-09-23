@@ -3,6 +3,7 @@ set -eux
 tar -xf make*
 rm *.tar.gz
 cd make*
+export CFLAGS="--static"
 ./configure --prefix=""
 ./build.sh
 ./make install-strip

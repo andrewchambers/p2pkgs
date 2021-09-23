@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eux
+
+parallel=4
+cfgcache="$(pwd)/configcache"
+export LDFLAGS="--static"
+
+for pkg in *.tar*
+do
+  mkdir build
+  cd build
+  tar -xf ../$pkg
+  cd *
+  ./configure --cache-file=$cfgcache --prefix="" --disable-nls
+  make -j $parallel
+  make install-strip
+  cd ../..
+  rm -rf ./build
+done

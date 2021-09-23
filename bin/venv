@@ -7,7 +7,7 @@ pkgs=$@
 
 if test -e "$out"
 then
-  echo "$out already exists"
+  echo "$out already exists" 1>&2
   exit 1
 fi
 

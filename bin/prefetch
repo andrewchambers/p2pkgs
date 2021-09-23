@@ -1,0 +1,24 @@
+#!/bin/sh
+set -eu
+
+dir="/tmp/prefetch"
+rm -rf "$dir"
+mkdir "$dir"
+cd "$dir"
+
+for url in "$@"
+do
+    echo remote-name >> fetch
+    echo "url = $url" >> fetch
+done
+
+mkdir .fetch
+cd .fetch
+curl -LK ../fetch
+sha256sum * > ../sha256sums
+cd ..
+
+echo "fetch script at $dir/fetch"
+echo "sha256sums at $dir/sha256sums"
+echo "prefetched files in $dir/.fetch"
+

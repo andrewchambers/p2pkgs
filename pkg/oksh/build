@@ -1,0 +1,7 @@
+#!/bin/sh
+tar xf *
+cd oksh*
+export LDFLAGS="--static"
+./configure --prefix=""
+make
+make install
