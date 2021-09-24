@@ -1,0 +1,8 @@
+../oksh
+../gnu-base
+../make
+../binutils
+../gcc
+../musl
+../linux-headers
+../perl

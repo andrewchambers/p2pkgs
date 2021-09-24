@@ -83,7 +83,7 @@ env -i bwrap \
   --hostname build \
   --chdir /home/build \
   --setenv "HOME" /home/build \
-  --setenv "PATH" /bin \
+  --setenv "PATH" /bin:/usr/bin \
   --setenv "DESTDIR" /destdir \
   -- /build
 

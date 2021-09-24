@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.*
+cd *
+
+make ARCH=generic prefix="" install
+make ARCH=x86_64 prefix="" install

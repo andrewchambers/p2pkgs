@@ -17,3 +17,8 @@ do
   cd ../..
   rm -rf ./build
 done
+
+cd $DESTDIR
+mkdir -p usr/bin
+cd usr/bin
+ln -s /bin/env env

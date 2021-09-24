@@ -1,6 +1,10 @@
 # coolports
 
-A *simple*, *source based*, *hermetic* package system, that is *really fast* for cached packages... cool!
+A *simple*, *auditable*, *source based*, package system with an optional
+*self hostable* binary cache to accelerate package builds.
+
+A key feature of this package tree is every precompiled binary it depends on can be reproduced
+exactly via the package tree itself giving you full control of your software stack.
 
 ## Getting started
 
@@ -32,39 +36,4 @@ $ cat ./pkg/make/.closure
 
 ## How it works
 
-- The package tree is a *just* redo based build system, this means it is
-  simple and flexible.
-- Packages are built isolated from everything except declared dependencies.
-- Each package has a few files:
-  - ./pkg/$name/build-deps
-    - A list of build dependencies.
-  - ./pkg/$name/run-deps
-    - A list of runtime dependencies.
-  - ./pkg/$name/build
-    - The build/install script executed in the build sandbox.
-  - ./pkg/$name/fetch
-    - A curl script of files to download.
-  - ./pkg/$name/sha256sums
-    - Validation sums for the download.
-  - ./pkg/$name/files
-    - An optional directory of files added to the build directory.
-- Each package has has a few computed targets:
-  - ./pkg/$name/.pkghash
-    - A cryptographic hash representing this package, computed by hashing the *full* dependency graph.
-  - ./pkg/$name/.closure
-    - A computed list containing the transitive runtime dependencies of this package.
-  - ./pkg/$name/.bclosure
-    - A computed list of all the transitive build time dependencies of this package.
-  - ./pkg/$name/.pkg.tar.gz
-    - The actual package contents once build.
-
-So what is the point?
-
-Once we have a .pkghash that represents each package and encapsulates the entire dependency tree we can now use this as a cache tag and immutable id for that package.
-
-We gain:
-
-- Transparent build caching, by simply checking https://$cache/$pkghash.tar.gz before performing a build we can skip huge amounts redundant package builds.
-- Easy distributed builds by shipping package closures to remote servers.
-- Easy access to the source code of our entire system.
-- The ability to quickly build all our packages from a tiny set of host dependencies.
+See the [technical documentation](./doc/TECHNICAL.md).

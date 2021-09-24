@@ -1,0 +1,9 @@
+../oksh
+../musl
+../gcc
+../binutils
+../make
+../gnu-base
+../openssl
+../zlib
+../libffi

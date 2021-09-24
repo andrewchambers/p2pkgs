@@ -1,10 +1,14 @@
 #!/bin/sh
 set -eu
 
-dir="/tmp/prefetch"
-rm -rf "$dir"
-mkdir "$dir"
-cd "$dir"
+if ! test -e ./build
+then
+  echo "should be run from a package directory" 1>&1
+  exit 1
+fi
+
+rm -rf ./.fetch
+rm -f ./fetch
 
 for url in "$@"
 do
@@ -17,8 +21,3 @@ cd .fetch
 curl -LK ../fetch
 sha256sum * > ../sha256sums
 cd ..
-
-echo "fetch script at $dir/fetch"
-echo "sha256sums at $dir/sha256sums"
-echo "prefetched files in $dir/.fetch"
-

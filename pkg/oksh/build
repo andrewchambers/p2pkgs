@@ -1,11 +1,11 @@
 #!/bin/sh
 set -eux
 tar xf *
-cd oksh*
+rm *.tar.gz
+cd *
 export LDFLAGS="--static"
 ./configure --prefix=""
 make
 make install
 cd $DESTDIR/bin
-strip *
 ln -s oksh sh

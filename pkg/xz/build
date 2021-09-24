@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.gz
+cd *
+export LDFLAGS=--static
+./configure --prefix="/" --disable-nls --enable-shared=false
+make install
+cd $DESTDIR
+rm -rf ./lib ./include ./share/doc # not needed for now

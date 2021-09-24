@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.gz
+cd *
+./configure \
+  --prefix="" \
+  -- \
+  -DCMAKE_BUILD_TYPE:STRING=Release
+make install

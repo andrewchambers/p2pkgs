@@ -1,0 +1,4 @@
+../musl
+../openssl
+../zlib
+../libffi
