@@ -1,0 +1,7 @@
+.redo
+**/.pkg.tar.gz
+**/.closure
+**/.bclosure
+**/.pkghash
+**/.fetch
+**/.build
