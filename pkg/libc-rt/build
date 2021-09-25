@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eux
-mkdir "$DESTDIR"/lib
-cp -vr /x86_64-linux-musl/lib/*.so* "$DESTDIR/lib"

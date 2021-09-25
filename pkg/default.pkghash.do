@@ -39,18 +39,76 @@ else
 	redo-ifcreate files
 fi
 
+if test -e fetch
+then
+  redo-ifchange fetch
+else
+  redo-ifcreate fetch
+fi
+
 (
   set -e
   echo rhash # Recursive hash tag, see seed/.pkghash.do for content hash.
-  echo sums
-  test -s sha256sums && cat sha256sums
+  echo fetch
+  if test -e fetch
+  then
+    file=""
+    url=""
+    OLDIFS="$IFS"; IFS=$'\n'
+    for line in $(recsel -p url,file,sha256 fetch) # XXX We don't want to depend on recutils
+    do
+      case "$line" in
+        file:*)
+          file="${line#file: }"
+        ;;
+        url:*)
+          url="${line#url: }"
+        ;;
+        sha256:*)
+          sha256="${line#sha256: }"
+          if test -z "$url"
+          then
+            echo "fetch missing url field" 1>&2
+            exit 1
+          fi
+          if test -z "$sha256"
+          then
+            echo "fetch: url: $url missing sha256 field" 1>&2
+            exit 1
+          fi
+          if test -z "$file"
+          then
+            file="$(basename $url)"
+          fi
+
+          if ! test "$file" = "$(basename $file)"
+          then
+            echo "fetch: file: $file must not be a directory or complex path" 1>&2
+            exit 1
+          fi
+          # only $file and $sha256 contribute to pkghash.
+          echo "$file"
+          echo "$sha256"
+          file=""
+          url=""
+          sha256=""
+        ;;
+        *)
+          echo "unexpected line: $line" 1>&2
+          exit 1
+        ;;
+      esac
+    done
+    IFS="$OLDIFS"
+  fi
   echo build
   cat build
   echo files
   if test -e files
   then
     # XXX we need some canonical tar format
-    # guaranteed to be the same for everyone.
+    # guaranteed to be the same for everyone,
+    # this is currently just wrong.
     find ./files -print0 -type f \
     | sort -z \
     | tar -cf - \
@@ -58,7 +116,6 @@ fi
           --numeric-owner \
           --owner=0 \
           --group=0 \
-          --mode="go-rwx,u-rw" \
           --mtime='1970-01-01' \
           --no-recursion \
           --null \

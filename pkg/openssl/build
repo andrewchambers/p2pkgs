@@ -4,4 +4,5 @@ tar xf *
 rm *.tar.gz
 cd *
 ./config --prefix="/"
-make install
+make
+make install_sw DESTDIR="$DESTDIR"

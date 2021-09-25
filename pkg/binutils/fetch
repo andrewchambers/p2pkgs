@@ -1,2 +1,3 @@
-remote-name
-url = https://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.gz
+url: https://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.gz
+sha256: c44968b97cd86499efbc4b4ab7d98471f673e5414c554ef54afa930062dbbfcb
+
