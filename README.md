@@ -15,10 +15,12 @@ Install the dependencies:
 
 - [recutils](https://www.gnu.org/software/recutils) for some text databases.
 - [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox.
-- [redo](https://github.com/apenwarr/redo)[2] to run build rules.
+- [redo](https://github.com/apenwarr/redo)[1] to run build rules.
 - [curl](https://curl.se/) to download source tarballs.
 
-- [1] ./bin/do is a pure shell version that lacks incremental builds, but will work for
+
+
+[1] ./bin/do is a pure shell version that lacks incremental builds, but will work for
   building a single package.
 
 ## Running packages in a venv
