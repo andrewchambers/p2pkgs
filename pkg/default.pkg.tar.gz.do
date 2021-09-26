@@ -13,6 +13,16 @@ cd $pkgdir
 redo-ifchange .pkghash .bclosure .closure
 redo-ifchange $(cat .closure) $(cat .bclosure)
 
+if test -n "$PKG_BINARY_CACHE_URL"
+then
+  if curl -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz"
+  then
+    redo-stamp < "$out"
+    exit 0
+  fi
+  rm "$out"
+fi
+
 "$startdir"/../bin/do-fetch fetch
 
 if test -e .build
@@ -88,4 +98,4 @@ tar \
 chmod -R 700 .build
 rm -rf .build
 
-redo-stamp < $out
+redo-stamp < "$out"

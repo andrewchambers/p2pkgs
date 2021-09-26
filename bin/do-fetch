@@ -30,6 +30,7 @@ do
     ;;
     sha256:*)
       sha256="${line#sha256: }"
+      
       if test -z "$file"
       then
         file="$(basename $url)"

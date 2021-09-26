@@ -9,7 +9,6 @@ tarballs="
 ../gnu-base/.pkg.tar.gz
 ../xz/.pkg.tar.gz
 ../make/.pkg.tar.gz
-../gcc/.pkg.tar.gz
 ../binutils/.pkg.tar.gz
 ../musl/.pkg.tar.gz
 ../linux-headers/.pkg.tar.gz
