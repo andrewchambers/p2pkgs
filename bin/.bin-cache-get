@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -eu
+
+tar="$1"
+out="$2"
+
+case "$PKG_BINARY_CACHE_URL" in
+  ipfs://*)
+    path="/ipfs/${PKG_BINARY_CACHE_URL#ipfs://}/$tar"
+    if which ipfs >/dev/null 2>&1
+    then
+      exec ipfs get -o "$out" "$path"
+    else
+      exec curl --fail -L "https://ipfs.io$path" -o "$out" 1>&2
+    fi
+  ;;
+  ipns://*)
+    path="/ipns/${PKG_BINARY_CACHE_URL#ipns://}/$tar"
+    if which ipfs >/dev/null 2>&1
+    then
+      exec ipfs get -o "$out" "$path"
+    else
+      exec curl --fail -L "https://ipfs.io$path" -o "$out" 1>&2
+    fi
+  ;;
+esac
+
+exec curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/$tar"

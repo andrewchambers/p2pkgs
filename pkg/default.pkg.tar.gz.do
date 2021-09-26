@@ -15,11 +15,14 @@ redo-ifchange $(cat .closure)
 
 if test -n "${PKG_BINARY_CACHE_URL:-}"
 then
-  if curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz" 2> /dev/null
+  cachetar="$(cat .pkghash).tar.gz"
+  if "$startdir"/../bin/.bin-cache-get "$cachetar" "$out" > /dev/null 2>&1
   then
     redo-stamp < "$out"
     exit 0
   fi
+  # XXX distinguish between error and 404
+  echo "binary cache lookup failed" >&2
   test -e "$out" && rm "$out"
 fi
 

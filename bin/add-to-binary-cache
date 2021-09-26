@@ -50,5 +50,9 @@ tars="$(
 mkdir -p "$out"
 for tar in $tars
 do
-  cp "$tar" "$out/$(cat $(dirname $tar)/.pkghash).tar.gz"
+  outtar="$out/$(cat $(dirname $tar)/.pkghash).tar.gz"
+  if ! test -e "$outtar"
+  then
+    cp "$tar" "$outtar"
+  fi
 done
