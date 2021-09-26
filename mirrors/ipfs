@@ -1,0 +1,113 @@
+%rec: ipfs_source
+%unique: sha256 cid
+%mandatory: sha256 cid source_url
+%allowed: sha256 cid source_url
+%sort: source_url
+
+source_url: http://ftp.barfooze.de/pub/sabotage/tarballs/linux-headers-4.19.88-1.tar.xz
+sha256: 995bc76ccf0c40d752b5ea67c022232a17eef6c9ec80ea74ea742e3c19992813
+cid: QmUqB24HxtVGiinvKH53Vy7MaLWiT2qV5q3EHcrh9Ee6Ua
+
+source_url: http://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.xz
+sha256: 4c4a6fb8a8396059241c2e674b85b351c26a5d678274007f076957afa1cc9ddf
+cid: QmbJkwhifN3LM9LtVjDYZJ7dSBmAxarQF4MsbXPJyXpvH2
+
+source_url: https://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.gz
+sha256: c44968b97cd86499efbc4b4ab7d98471f673e5414c554ef54afa930062dbbfcb
+cid: QmX8E9WoQhRMkcYf8eBYuFbQyEQW4K2wKrRXdsCrS43Bwi
+
+source_url: https://ftp.gnu.org/gnu/coreutils/coreutils-8.31.tar.xz
+sha256: ff7a9c918edce6b4f4b2725e3f9b37b0c4d193531cac49a48b56c4d0d3a9e9fd
+cid: Qmdv65J1BEmwy9APFbJ1ViUR1rLiMZwYTKtTYUMvvYRpEk
+
+source_url: https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz
+sha256: b3a7a6221c3dc916085f0d205abf6b8e1ba443d4dd965118da364a1dc1cb3a26
+cid: QmcSuDYEnz5UvVjFXvTk45cdA2kYfNEr37XjchrdhFNubk
+
+source_url: https://ftp.gnu.org/gnu/gawk/gawk-5.0.1.tar.xz
+sha256: 8e4e86f04ed789648b66f757329743a0d6dfb5294c3b91b756a474f1ce05a794
+cid: QmZn9GcUN2pctKjb57qvRKCTj9TXtfc5qayEd3Pi47oFkN
+
+source_url: https://ftp.gnu.org/gnu/grep/grep-3.3.tar.xz
+sha256: b960541c499619efd6afe1fa795402e4733c8e11ebf9fafccc0bb4bccdc5b514
+cid: QmVuTSpED22b32CY4DASFFBsi93TirGb8b2MXMevHJZpMj
+
+source_url: https://ftp.gnu.org/gnu/gzip/gzip-1.10.tar.gz
+sha256: c91f74430bf7bc20402e1f657d0b252cb80aa66ba333a25704512af346633c68
+cid: QmUvHF3VvK6FBSw1kEjp6XpzhvCKwwdNJhN11UB4wTtaJ6
+
+source_url: https://ftp.gnu.org/gnu/make/make-4.2.tar.gz
+sha256: e968ce3c57ad39a593a92339e23eb148af6296b9f40aa453a9a9202c99d34436
+cid: QmYpJkdPPrrc2rxhhTqeAbAZnoiBsdYh7jXFhCd2AvWHHH
+
+source_url: https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz
+sha256: 17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459
+cid: QmWNG4jx4CU44ZTvjc6a3fqZgKnchoLuHiHV1LDgeueNKr
+
+source_url: https://ftp.gnu.org/gnu/patch/patch-2.7.tar.gz
+sha256: 59c29f56faa0a924827e6a60c6accd6e2900eae5c6aaa922268c717f06a62048
+cid: QmTjQEg7Td9hPgf2L7yEaQaGKEKHKEfYqpABw5At2yC4Ky
+
+source_url: https://ftp.gnu.org/gnu/sed/sed-4.7.tar.xz
+sha256: 2885768cd0a29ff8d58a6280a270ff161f6a3deb5690b2be6c49f46d4c67bd6a
+cid: QmcFoAZ2wPU2VRGaTuTFaUoE3c61uoyU77jnW4PxP7ACYi
+
+source_url: https://ftp.gnu.org/gnu/tar/tar-1.32.tar.gz
+sha256: b59549594d91d84ee00c99cf2541a3330fed3a42c440503326dab767f2fbb96c
+cid: QmfAK7AR8VLRfCpue3QuCyk5FPoyQYV1Uo3S16y9Kj9V7L
+
+source_url: https://ftp.gnu.org/gnu/which/which-2.21.tar.gz
+sha256: f4a245b94124b377d8b49646bf421f9155d36aa7614b6ebf83705d3ffc76eaad
+cid: QmPbCxFfjbzWoFrX6myj4LpVL7fTqihpRoS6qX6MM4Hof8
+
+source_url: https://ftp.gnu.org/pub/gnu/findutils/findutils-4.7.0.tar.xz
+sha256: c5fefbdf9858f7e4feb86f036e1247a54c79fc2d8e4b7064d5aaa1f47dfa789a
+cid: QmPtSHWSFbqAYjBFytuhb4Kogx49WHc493EK3BGm3jWrN6
+
+source_url: https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.17.2.tar.gz
+sha256: fc77324c4f820a09052a7785549b8035ff8d3461ded5bbd80d252ae7d1cd3aa5
+cid: QmcpnbQdu1F7ea97YKBd3S4A8Qibm6kXbikxr24byng1rb
+
+source_url: https://github.com/ibara/oksh/releases/download/oksh-6.9/oksh-6.9.tar.gz
+sha256: c08d97b2ac9ee5d88e9e508d27c75502b2d06c20d4c5ab87b496cb3b9951bd35
+cid: QmdZ5a6v3ZpgWdsAhkUwGHyWD7wspxmgyTBqX72VQNF9cy
+
+source_url: https://github.com/libffi/libffi/releases/download/v3.3/libffi-3.3.tar.gz
+sha256: 72fba7922703ddfa7a028d513ac15a85c8d54c8d67f55fa5a4802885dc652056
+cid: QmckUCHwtrkEFYTY9mnswYbfR7Bf2rQyyydfWbVWpo644r
+
+source_url: https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz
+sha256: 3b8cf51548dfc49b7efe035e191ff5e1963ebc4fe8f6064a5eefc5343eaf78a5
+cid: Qmb4NvXZVdqyUcNPf8zhgqQQBmLmJke4zQs3UpxwNbBjV6
+
+source_url: https://gmplib.org/download/gmp/gmp-6.2.1.tar.xz
+sha256: fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2
+cid: QmQc6FM3b3zZhNfEaJx2QESAcZKkwcBGV2u3C6PZMi7RpP
+
+source_url: https://musl.libc.org/releases/musl-1.2.2.tar.gz
+sha256: 9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd
+cid: QmWotMZZFdS7rPNu3Y58WL1NaVXKLJH195pcvR4oMEdZQE
+
+source_url: https://static.rust-lang.org/dist/rust-1.55.0-x86_64-unknown-linux-musl.tar.gz
+sha256: f24f68587253c4bfbe59d3d10fe4897068d9130538de6b2d02097a25718030c2
+cid: QmU6hZUETaCA4dipiw4dZ2L6pZmG46wcMHdUamwWz33nVn
+
+source_url: https://tukaani.org/xz/xz-5.2.5.tar.gz
+sha256: f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10
+cid: QmUSnYGrWAFUTEeJBWWkFcyACmePgyeJiLw6D3n2Ro7kPk
+
+source_url: https://www.cpan.org/src/5.0/perl-5.30.2.tar.gz
+sha256: 66db7df8a91979eb576fac91743644da878244cf8ee152f02cd6f5cd7a731689
+cid: QmTxwAHsvkuDqCUU8mzRWhpi8o7ck92A2Zg1sZFxyAAg3c
+
+source_url: https://www.mpfr.org/mpfr-current/mpfr-4.1.0.tar.gz
+sha256: 3127fe813218f3a1f0adf4e8899de23df33b4cf4b4b3831a5314f78e65ffa2d6
+cid: QmfNwwGjkP4zL2GkcTfP16xqchcYfpGGidUB6dRdQAX362
+
+source_url: https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+sha256: ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46
+cid: QmTxXRjXjhGG2KhVexnrSeFSuVW5wBNseLcEyFyY75VRsZ
+
+source_url: https://www.zlib.net/zlib-1.2.11.tar.gz
+sha256: c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
+cid: QmVUxkKQnLaiWK7nSwMFQ97LYSeGuwtRFjhw9ooMpJd5Gr
