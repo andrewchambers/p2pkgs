@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+dir="$(cd "$(dirname "$0")"; pwd)";
+pkgdir=$(realpath $dir/../pkg)
+for f in $(find "$pkgdir" -not -path '*/\.*' -name "fetch" ) 
+do
+  "$dir/ipfs-pin-fetch-file" "$f"
+done

@@ -6,59 +6,14 @@
 
 set -eu
 
+startdir="$PWD"
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
 redo-ifchange .pkghash .bclosure .closure
 redo-ifchange $(cat .closure) $(cat .bclosure)
 
-mkdir -p .fetch
-cd .fetch
-
-file=""
-url=""
-OLDIFS="$IFS"; IFS=$'\n'
-set -x
-for line in $(recsel -p url,file,sha256 ../fetch)
-do
-  case "$line" in
-    file:*)
-      file="${line#file: }"
-    ;;
-    url:*)
-      url="${line#url: }"
-    ;;
-    sha256:*)
-      sha256="${line#sha256: }"
-      if test -z "$file"
-      then
-        file="$(basename $url)"
-      fi
-      if ! test "$(sha256sum $file 2>/dev/null | cut -c -64)" = "$sha256"
-      then
-        rm -f "$file" 2>/dev/null
-        curl -L "$url" -o "$file"
-        if ! test "$(sha256sum $file | cut -c -64)" = "$sha256"
-        then
-          echo "$url does not match $sha256" 1>&2
-          exit 1
-        fi
-      fi
-      file=""
-      url=""
-      sha256=""
-    ;;
-    *)
-      echo "unexpected line: $line" 1>&2
-      exit 1
-    ;;
-  esac
-done
-IFS="$OLDIFS"
-
-# XXX we should delete files we are not expecting...
-
-cd ..
+"$startdir"/../bin/do-fetch fetch
 
 if test -e .build
 then
@@ -121,6 +76,10 @@ env -i bwrap \
 tar \
  -C .build/chroot/destdir \
  -czf $out \
+ --format=posix \
+ --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime,delete=mtime \
+ --mtime='2021-01-01 00:00:00Z' \
+ --sort=name \
  --numeric-owner \
  --owner=0 \
  --group=0 \
@@ -128,3 +87,5 @@ tar \
 
 chmod -R 700 .build
 rm -rf .build
+
+redo-stamp < $out

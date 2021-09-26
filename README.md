@@ -3,12 +3,23 @@
 A *simple*, *auditable*, *source based*, package system with an optional
 *self hostable* binary cache to accelerate package builds.
 
-A key feature of this package tree is every precompiled binary it depends on can be reproduced
-exactly via the package tree itself giving you full control of your software stack.
+Key features:
+
+-  Every precompiled binary it depends on can be reproduced exactly via the package tree itself allowing total auditability.
+- All source code and bootstrap binaries are also hosted on ipfs for resilience (with primary sources listed too).
+
 
 ## Getting started
 
-You need [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox and [redo](https://github.com/apenwarr/redo) to execute the build rules.
+Install the dependencies:
+
+- [recutils](https://www.gnu.org/software/recutils) for some text databases.
+- [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox.
+- [redo](https://github.com/apenwarr/redo)[2] to run build rules.
+- [curl](https://curl.se/) to download source tarballs.
+
+- [1] ./bin/do is a pure shell version that lacks incremental builds, but will work for
+  building a single package.
 
 ## Running packages in a venv
 

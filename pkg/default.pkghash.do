@@ -55,7 +55,7 @@ fi
     file=""
     url=""
     OLDIFS="$IFS"; IFS=$'\n'
-    for line in $(recsel -p url,file,sha256 fetch) # XXX We don't want to depend on recutils
+    for line in $(recsel -p url,file,sha256 fetch)
     do
       case "$line" in
         file:*)
@@ -71,16 +71,10 @@ fi
             echo "fetch missing url field" 1>&2
             exit 1
           fi
-          if test -z "$sha256"
-          then
-            echo "fetch: url: $url missing sha256 field" 1>&2
-            exit 1
-          fi
           if test -z "$file"
           then
             file="$(basename $url)"
           fi
-
           if ! test "$file" = "$(basename $file)"
           then
             echo "fetch: file: $file must not be a directory or complex path" 1>&2
@@ -91,7 +85,6 @@ fi
           echo "$sha256"
           file=""
           url=""
-          sha256=""
         ;;
         *)
           echo "unexpected line: $line" 1>&2
@@ -109,17 +102,15 @@ fi
     # XXX we need some canonical tar format
     # guaranteed to be the same for everyone,
     # this is currently just wrong.
-    find ./files -print0 -type f \
-    | sort -z \
-    | tar -cf - \
-          --format=posix \
-          --numeric-owner \
-          --owner=0 \
-          --group=0 \
-          --mtime='1970-01-01' \
-          --no-recursion \
-          --null \
-          --files-from -
+    tar -cf - \
+        --format=posix \
+        --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime,delete=mtime \
+        --mtime='2021-01-01 00:00:00Z' \
+        --sort=name \
+        --numeric-owner \
+        --owner=0 \
+        --group=0 \
+        .
   fi
   echo run-deps
   cat $rundephashes < /dev/null

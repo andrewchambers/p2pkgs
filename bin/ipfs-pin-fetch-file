@@ -1,0 +1,63 @@
+#!/bin/sh
+
+set -eu
+
+dir="$(cd "$(dirname "$0")"; pwd)"
+
+ipfsrec="$(realpath $dir/../mirrors/ipfs)"
+fetchfile="$(realpath $1)"
+tmp="$(mktemp)"
+trap 'rm -f $tmp' EXIT
+
+url=""
+OLDIFS="$IFS"; IFS=$'\n'
+for line in $(recsel -p url,sha256 "$fetchfile")
+do
+  case "$line" in
+    url:*)
+      # Only take first url.
+      if test -z "$url"
+      then
+        url="${line#url: }"
+      fi
+    ;;
+    sha256:*)
+      sha256="${line#sha256: }"
+      if test -z "$url"
+      then
+        echo "fetch missing url field" 1>&2
+        exit 1
+      fi
+
+      cid=$(recsel -C -P cid -e "sha256 = '$sha256'" "$ipfsrec" | head -n 1)
+      if test -n "${cid}"
+      then
+        echo "pinning $sha256 directly from /ipfs/$cid"
+        ipfs pin add "/ipfs/$cid"
+      else
+        echo "pinning $sha256 from $url"
+        rm -f "$tmp"
+        curl -L "$url" --output "$tmp"
+        actualsha256="$(sha256sum "$tmp" | cut -c -64)"
+        if test "$actualsha256" = "$sha256"
+        then
+          cid=$(ipfs add -q --pin "$tmp")
+          TMPDIR=$pkgdir recins \
+            -f "source_url" -v "$url" \
+            -f "sha256" -v "$sha256" \
+            -f "cid" -v "$cid" \
+            "$ipfsrec" 
+        else
+          echo "$url sha256 was '$actualsha256' expected '$sha256'" 1>&2
+          exit 1
+        fi
+      fi
+      url=""
+    ;;
+    *)
+      echo "unexpected line: $line" 1>&2
+      exit 1
+    ;;
+  esac
+done
+IFS="$OLDIFS"

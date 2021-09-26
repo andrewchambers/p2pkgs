@@ -1,0 +1,84 @@
+#!/bin/sh
+
+# Fetch and verify the urls listed in the given rec file
+# and store them in $fetchdir/.fetch/*. Download will
+# prefer ipfs mirrors unless PKG_MIRROR_IPFS=off.
+
+set -eu
+
+dir="$(cd "$(dirname "$0")"; pwd)"
+ipfsrec="$(realpath $dir/../mirrors/ipfs)"
+fetchfile="$(realpath $1)"
+fetchdir="$(dirname "$fetchfile")"
+
+cd "$fetchdir"
+mkdir -p .fetch
+cd .fetch
+
+rm -f ../.fetch-expected-files
+file=""
+url=""
+OLDIFS="$IFS"; IFS=$'\n'
+for line in $(recsel -p url,file,sha256 ../fetch)
+do
+  case "$line" in
+    file:*)
+      file="${line#file: }"
+    ;;
+    url:*)
+      url="${line#url: }"
+    ;;
+    sha256:*)
+      sha256="${line#sha256: }"
+      if test -z "$file"
+      then
+        file="$(basename $url)"
+      fi
+
+      echo "$file" >> ../.fetch-expected-files
+
+      if ! test "$(sha256sum "$file" 2>/dev/null | cut -c -64)" = "$sha256"
+      then
+        
+        rm -f "$file" 2>/dev/null
+
+        cid="$(recsel -P cid -e "sha256 = '$sha256'" $ipfsrec)"
+        if test -n "$cid" && ! test "${PKG_MIRROR_IPFS:-}" = "off"
+        then
+          if which ipfs >/dev/null 2>&1
+          then
+            ipfs get -o "$file" "/ipfs/$cid"
+          else
+            curl -L "https://ipfs.io/ipfs/$cid" -o "$file"
+          fi
+        else
+          curl -L "$url" -o "$file"
+        fi
+        
+        if ! test "$(sha256sum $file | cut -c -64)" = "$sha256"
+        then
+          echo "fetch of $sha256 failed, bad checksum" 1>&2
+          exit 1
+        fi
+      fi
+
+      file=""
+      url=""
+    ;;
+    *)
+      echo "unexpected line: $line" 1>&2
+      exit 1
+    ;;
+  esac
+done
+IFS="$OLDIFS"
+
+cd ..
+
+ls -A ./.fetch/ > .fetch-actual-files-sorted
+sort -u .fetch-expected-files > .fetch-expected-sorted
+for f in $(comm -1 -3 .fetch-expected-sorted .fetch-actual-files-sorted)
+do
+  rm -f ".fetch/$f"
+done
+rm .fetch-expected-files .fetch-expected-sorted .fetch-actual-files-sorted
