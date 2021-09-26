@@ -37,6 +37,7 @@ find . -print0 \
   | sort -z \
   | tar -czf - \
         --format=posix \
+        --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime \
         --numeric-owner \
         --owner=0 \
         --group=0 \

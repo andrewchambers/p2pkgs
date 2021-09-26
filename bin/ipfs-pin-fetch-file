@@ -15,7 +15,6 @@ for line in $(recsel -p url,sha256 "$fetchfile")
 do
   case "$line" in
     url:*)
-      # Only take first url.
       if test -z "$url"
       then
         url="${line#url: }"

@@ -6,6 +6,9 @@
 
 set -eu
 
+# XXX Spurious stdout from some commands.
+exec 1>&2
+
 startdir="$PWD"
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
@@ -75,15 +78,15 @@ env -i bwrap \
 # XXX whitelist of allowed output dirs?
 tar \
  -C .build/chroot/destdir \
- -czf $out \
- --format=posix \
- --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime,delete=mtime \
- --mtime='2021-01-01 00:00:00Z' \
- --sort=name \
- --numeric-owner \
- --owner=0 \
- --group=0 \
- .
+  --format=posix \
+  --mtime='2021-01-01 00:00:00Z' \
+  --sort=name \
+  --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime \
+  --numeric-owner \
+  --owner=0 \
+  --group=0 \
+  -czf $out \
+  .
 
 chmod -R 700 .build
 rm -rf .build

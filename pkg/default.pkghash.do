@@ -62,6 +62,11 @@ fi
           file="${line#file: }"
         ;;
         url:*)
+          if test -n "$url"
+          then
+            echo "only one url is supported per item" 1>&2
+            exit 1
+          fi
           url="${line#url: }"
         ;;
         sha256:*)
@@ -102,14 +107,15 @@ fi
     # XXX we need some canonical tar format
     # guaranteed to be the same for everyone,
     # this is currently just wrong.
-    tar -cf - \
+    tar \
         --format=posix \
-        --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime,delete=mtime \
         --mtime='2021-01-01 00:00:00Z' \
         --sort=name \
+        --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime \
         --numeric-owner \
         --owner=0 \
         --group=0 \
+        -cf - \
         .
   fi
   echo run-deps
