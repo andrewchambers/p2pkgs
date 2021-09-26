@@ -41,7 +41,8 @@ do
         if test "$actualsha256" = "$sha256"
         then
           cid=$(ipfs add -q --pin "$tmp")
-          TMPDIR=$pkgdir recins \
+          TMPDIR="$(dirname $fetchfile)" recins \
+            -t "ipfs_source" \
             -f "source_url" -v "$url" \
             -f "sha256" -v "$sha256" \
             -f "cid" -v "$cid" \

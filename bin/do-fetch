@@ -47,12 +47,12 @@ do
         then
           if which ipfs >/dev/null 2>&1
           then
-            ipfs get -o "$file" "/ipfs/$cid"
+            ipfs get -o "$file" "/ipfs/$cid" 1>&2
           else
-            curl -L "https://ipfs.io/ipfs/$cid" -o "$file"
+            curl -L "https://ipfs.io/ipfs/$cid" -o "$file" 1>&2
           fi
         else
-          curl -L "$url" -o "$file"
+          curl -L "$url" -o "$file" 1>&2
         fi
         
         if ! test "$(sha256sum $file | cut -c -64)" = "$sha256"

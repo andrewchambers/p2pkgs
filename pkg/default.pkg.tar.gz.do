@@ -6,9 +6,6 @@
 
 set -eu
 
-# XXX Spurious stdout from some commands.
-exec 1>&2
-
 startdir="$PWD"
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
