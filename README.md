@@ -42,6 +42,27 @@ $ cat ./pkg/perl/.closure
 ./pkg/musl/.pkg.tar.gz
 ```
 
+## Setting up a binary cache
+
+Some packages take a long time to build, you can avoid rebuilding it by
+creating a binary cache.
+
+Generate the package tarballs and serve them over http:
+
+```
+$ ./bin/prepare-binary-cache -o /path/to/cache ./pkg/{gcc,binutils,musl}
+$ cd /path/to/cache
+$ python3 -m http.server --bind 127.0.0.1
+Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)
+```
+
+Use the binary cache:
+
+```
+$ export PKG_BINARY_CACHE_URL="http://127.0.0.1:8000"
+$ redo ./pkg/gcc/.pkg.tar.gz
+```
+
 ## Mirroring the repository
 
 If you want to help our project and mirror all our source dependencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.

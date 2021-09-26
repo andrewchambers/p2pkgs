@@ -11,17 +11,26 @@ out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
 redo-ifchange .pkghash .bclosure .closure
-redo-ifchange $(cat .closure) $(cat .bclosure)
+redo-ifchange $(cat .closure)
 
 if test -n "$PKG_BINARY_CACHE_URL"
 then
-  if curl -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz"
+  if curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz"
   then
     redo-stamp < "$out"
     exit 0
   fi
-  rm "$out"
+  test -e "$out" && rm "$out"
 fi
+
+if test "$PKG_FORCE_BINARY_PACKAGES" = "on"
+then
+  echo "PKG_FORCE_BINARY_PACKAGES is enabled and the binary cache does not have this package" 1>&2
+  exit 1
+fi
+
+# Download failed, we do need the build closure.
+redo-ifchange $(cat .bclosure)
 
 "$startdir"/../bin/do-fetch fetch
 
