@@ -30,12 +30,6 @@ shift $((OPTIND-1))
 
 pkgs=$@
 
-if test -e "$out"
-then
-  echo "$out already exists" 1>&2
-  exit 1
-fi
-
 redo-ifchange $(
   set -e
   for pkg in $pkgs
@@ -53,7 +47,7 @@ tars="$(
   done | sort -u
 )"
 
-mkdir "$out"
+mkdir -p "$out"
 for tar in $tars
 do
   cp "$tar" "$out/$(cat $(dirname $tar)/.pkghash).tar.gz"

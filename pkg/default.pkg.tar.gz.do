@@ -13,9 +13,9 @@ cd $pkgdir
 redo-ifchange .pkghash .bclosure .closure
 redo-ifchange $(cat .closure)
 
-if test -n "$PKG_BINARY_CACHE_URL"
+if test -n "${PKG_BINARY_CACHE_URL:-}"
 then
-  if curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz"
+  if curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/(cat $.pkghash).tar.gz" 2> /dev/null
   then
     redo-stamp < "$out"
     exit 0
@@ -23,9 +23,9 @@ then
   test -e "$out" && rm "$out"
 fi
 
-if test "$PKG_FORCE_BINARY_PACKAGES" = "on"
+if test "${PKG_FORCE_BINARY_PACKAGES:-}" = "on"
 then
-  echo "PKG_FORCE_BINARY_PACKAGES is enabled and the binary cache does not have this package" 1>&2
+  echo "PKG_FORCE_BINARY_PACKAGES is enabled and the binary cache download failed" 1>&2
   exit 1
 fi
 

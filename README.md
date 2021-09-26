@@ -50,7 +50,7 @@ creating a binary cache.
 Generate the package tarballs and serve them over http:
 
 ```
-$ ./bin/prepare-binary-cache -o /path/to/cache ./pkg/{gcc,binutils,musl}
+$ ./bin/add-to-binary-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
 $ cd /path/to/cache
 $ python3 -m http.server --bind 127.0.0.1
 Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)

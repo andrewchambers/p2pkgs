@@ -2,7 +2,7 @@
 
 set -eux
 
-out=""
+out="./venv"
 while getopts "o:" o
 do
   case "$o" in
