@@ -13,15 +13,13 @@ Key features:
 
 Install the dependencies:
 
-- [recutils](https://www.gnu.org/software/recutils) for some text databases.
 - [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox.
 - [redo](https://github.com/apenwarr/redo)[1] to run build rules.
 - [curl](https://curl.se/) to download source tarballs.
+- [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
 
 
-
-[1] ./bin/do is a pure shell version that lacks incremental builds, but will work for
-  building a single package.
+[1] We provide ./bin/do as a pure shell version that lacks incremental builds, but will work for building a single packages.
 
 ## Running packages in a venv
 
@@ -46,6 +44,14 @@ $ redo-ifchange ./pkg/make/.pkg.tar.gz
 $ cat ./pkg/make/.closure
 ./pkg/libc-rt/.pkg.tar.gz
 ```
+
+## Mirroring the repository
+
+If you want to help our project and mirror all our source depdendencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
+
+Alternatively you read the cids listed in ./mirrors/ipfs and decide which ones you
+want to mirror.
+
 
 ## How it works
 
