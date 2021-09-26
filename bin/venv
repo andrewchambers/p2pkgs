@@ -2,7 +2,19 @@
 
 set -eux
 
-out=$(realpath ./venv)
+out=""
+while getopts "o:" o
+do
+  case "$o" in
+    o)
+      out=${OPTARG}
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
 pkgs=$@
 
 if test -e "$out"

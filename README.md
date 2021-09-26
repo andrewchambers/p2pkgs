@@ -3,10 +3,7 @@
 A *simple*, *auditable*, *source based*, package system with an optional
 *self hostable* binary cache to accelerate package builds.
 
-Key features:
-
--  Every precompiled binary it depends on can be reproduced exactly via the package tree itself allowing total auditability.
-- All source code and bootstrap binaries are also hosted on ipfs for resilience (with primary sources listed too).
+Every precompiled binary it depends on can be reproduced exactly via the package tree itself allowing total auditability.
 
 
 ## Getting started
@@ -19,7 +16,7 @@ Install the dependencies:
 - [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
 
 
-[1] We provide ./bin/do as a pure shell version that lacks incremental builds, but will work for building a single packages.
+[1] We provide ./bin/do as an included version that lacks incremental builds, but will work for building single packages.
 
 ## Running packages in a venv
 
@@ -41,13 +38,13 @@ $ redo-ifchange ./pkg/make/.pkg.tar.gz
 ...
 
 # View package runtime dependencies
-$ cat ./pkg/make/.closure
-./pkg/libc-rt/.pkg.tar.gz
+$ cat ./pkg/perl/.closure
+./pkg/musl/.pkg.tar.gz
 ```
 
 ## Mirroring the repository
 
-If you want to help our project and mirror all our source depdendencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
+If you want to help our project and mirror all our source dependencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
 
 Alternatively you read the cids listed in ./mirrors/ipfs and decide which ones you
 want to mirror.

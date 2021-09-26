@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set -eu
+
+usage() {
+  echo "Usage: $0 [-o dir] pkgs..." 1>&2
+  exit 1
+}
+
+out=""
+while getopts "o:" o
+do
+  case "$o" in
+    o)
+      out=${OPTARG}
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+if test -z "${out}"
+then
+  echo "You must specify a cache output dir with -o" 1>&2
+  exit 1
+fi
+
+shift $((OPTIND-1))
+
+pkgs=$@
+
+if test -e "$out"
+then
+  echo "$out already exists" 1>&2
+  exit 1
+fi
+
+redo-ifchange $(
+  set -e
+  for pkg in $pkgs
+  do
+    echo "$pkg/.pkg.tar.gz"
+  done
+)
+
+tars="$(
+  set -e
+  for pkg in $pkgs
+  do
+    echo $pkg/.pkg.tar.gz
+    cat $pkg/.closure
+  done | sort -u
+)"
+
+mkdir "$out"
+for tar in $tars
+do
+  cp "$tar" "$out/$(cat $(dirname $tar)/.pkghash).tar.gz"
+done

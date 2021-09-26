@@ -16,7 +16,6 @@ The package tree is a *just* redo based build system, this means it is simple an
 - ./pkg/$name/files
   - An optional directory of files added to the build directory.
 
-
 ## Computed files
 
 Each package has has a few computed targets you can build manually:
@@ -33,4 +32,6 @@ Each package has has a few computed targets you can build manually:
 
 ## P2P mirrors
 
-We support ipfs p2p mirrors for everything we depend on.
+We support ipfs p2p mirrors for everything we depend on. The mirror database 
+is maintained in `./mirrors/ipfs` and can be populated automatically with scripts
+in `./bin`.
