@@ -15,6 +15,10 @@ Install the dependencies:
 - [curl](https://curl.se/) to download source tarballs.
 - [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
 
+Optional dependencies:
+
+- [ipfs](https://ipfs.io) Used for peer to peer package caches and source mirrors.
+
 
 [1] We provide ./bin/do as an included version that lacks incremental builds, but will work for building single packages.
 
@@ -91,13 +95,13 @@ $ export PKG_BINARY_CACHE_URL="ipns://$(ipns name publish $cid)"
 
 ### Known package caches
 
-Development package cache by Andrew Chambers:
+Development package cache hosted by Andrew Chambers:
 
 ```
 ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
 ```
 
-## Mirroring the repository
+## Mirroring package source code
 
 If you want to help our project and mirror all our source dependencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
 
