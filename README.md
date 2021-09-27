@@ -47,6 +47,8 @@ $ cat ./pkg/perl/.closure
 Some packages take a long time to build, you can avoid rebuilding it by
 creating a binary cache.
 
+### HTTP(s) binary cache
+
 Generate the package tarballs and serve them over http:
 
 ```
@@ -61,6 +63,30 @@ Use the binary cache:
 ```
 $ export PKG_BINARY_CACHE_URL="http://127.0.0.1:8000"
 $ redo ./pkg/gcc/.pkg.tar.gz
+```
+
+### IPFS binary cache
+
+We support peer to peer binary caches via IPFS/IPNS (requires ipfs installed):
+
+```
+$ ./bin/add-to-binary-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
+$ cd /path/to/cache-dir
+$ cid=$(ipfs add -Q -r .)
+```
+
+Use the binary cache (requires ipfs installed):
+
+```
+$ export PKG_BINARY_CACHE_URL="ipfs://$cid"
+$ redo ./pkg/gcc/.pkg.tar.gz
+```
+
+You can use ipns too:
+
+```
+$ cid=$(ipfs add -Q -r .)
+$ export PKG_BINARY_CACHE_URL="ipfs://$(ipns name publish $cid)"
 ```
 
 ## Mirroring the repository

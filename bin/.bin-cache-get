@@ -1,29 +1,58 @@
 #!/bin/sh
 
+# Fetch a file from the binary cache
+# return 1 on error, 2 if not found.
+
 set -eu
 
 tar="$1"
 out="$2"
 
+ipfsget () {
+  # For ipfs we cannot fallback to the ipfs gateway as the binary cache
+  # is not signed, instead the user must manually use http if they want that.
+  
+  # If the cache directory is gone, this is just an error.
+  if ! ipfs object stat "$(dirname "$1")" >/dev/null 2>&1
+  then
+    exit 1
+  fi
+  # If the cache directory was found, but the file failed,
+  # treat as a 404
+  if ! ipfs get -o "$2" "$1" 2>/dev/null 1>&2
+  then
+    exit 2
+  fi
+  exit 0
+}
+
 case "$PKG_BINARY_CACHE_URL" in
   ipfs://*)
-    path="/ipfs/${PKG_BINARY_CACHE_URL#ipfs://}/$tar"
-    if which ipfs >/dev/null 2>&1
-    then
-      exec ipfs get -o "$out" "$path"
-    else
-      exec curl --fail -L "https://ipfs.io$path" -o "$out" 1>&2
-    fi
+    set +e
+    ipfsget "/ipfs/${PKG_BINARY_CACHE_URL#ipfs://}/$tar" "$out"
+    exit "$?"
   ;;
   ipns://*)
-    path="/ipns/${PKG_BINARY_CACHE_URL#ipns://}/$tar"
-    if which ipfs >/dev/null 2>&1
+    set +e
+    ipfsget "/ipns/${PKG_BINARY_CACHE_URL#ipns://}/$tar" "$out"
+    exit "$?"
+  ;;
+  *)
+    set +e
+    url="$PKG_BINARY_CACHE_URL/$tar"
+    out="$(curl -s -D - --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/$tar")"
+    rc="$?"
+    set -e
+    if test "$rc" != "0"
     then
-      exec ipfs get -o "$out" "$path"
-    else
-      exec curl --fail -L "https://ipfs.io$path" -o "$out" 1>&2
+      if echo "$out" | grep -q " 404"
+      then
+        exit 2
+      else
+        echo "download of $url failed" >&2
+        exit 1
+      fi
     fi
+    exit 0
   ;;
 esac
-
-exec curl --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/$tar"

@@ -16,19 +16,30 @@ redo-ifchange $(cat .closure)
 if test -n "${PKG_BINARY_CACHE_URL:-}"
 then
   cachetar="$(cat .pkghash).tar.gz"
-  if "$startdir"/../bin/.bin-cache-get "$cachetar" "$out" > /dev/null 2>&1
-  then
-    redo-stamp < "$out"
-    exit 0
-  fi
-  # XXX distinguish between error and 404
-  echo "binary cache lookup failed" >&2
-  test -e "$out" && rm "$out"
+  set +e
+  "$startdir"/../bin/.bin-cache-get "$cachetar" "$out"
+  rc="$?"
+  set -e
+  case "$rc" in
+    2)
+      echo "binary cache miss..." >&2
+    ;;
+    0)
+      redo-stamp < "$out"
+      exit 0
+    ;;
+    *)
+      echo "binary cache lookup failed, aborting" >&2
+      exit 1
+    ;;
+  esac
 fi
 
-if test "${PKG_FORCE_BINARY_PACKAGES:-}" = "on"
+test -e "$out" && rm "$out"
+
+if test "${PKG_FORCE_BINARY_PACKAGES:-}" = "yes"
 then
-  echo "PKG_FORCE_BINARY_PACKAGES is enabled and the binary cache download failed" 1>&2
+  echo "PKG_FORCE_BINARY_PACKAGES is 'yes' and the binary cache lookup failed" 1>&2
   exit 1
 fi
 
