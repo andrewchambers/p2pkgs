@@ -1,10 +1,15 @@
 # coolports
 
 A *simple*, *auditable*, *source based*, package system with an optional
-*self hostable* package cache to accelerate package builds.
+*self hostable* package cache and optional *p2p mirroring*.
 
-Every precompiled binary it depends on can be reproduced exactly via the package tree itself allowing total auditability.
+## Key features
 
+- Everything is build form source except a small set of well defined bootstrap packages.
+
+- Every bootstrap package can be reproduced exactly via the package tree itself allowing total auditability.
+
+- Every download can be mirrored over p2p networks and self hosted, there is no central server that can prevent packages from compiling.
 
 ## Getting started
 
