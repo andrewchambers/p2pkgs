@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.xz
+cd *
+./configure --prefix=""
+make install-strip
+cd $DESTDIR/bin
+ln -s pkgconf pkg-config

@@ -5,6 +5,7 @@
 ../gcc
 ../linux-headers
 ../cmake
+../pkgconf
 ../make
 ../python3
 ../rust-seed
