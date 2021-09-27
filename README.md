@@ -5,11 +5,13 @@ precompiled package cache and optional p2p mirroring.
 
 ## Key features
 
-- Everything is build form source except a small set of well defined bootstrap packages.
+- Everything is built from source except a small set of well defined bootstrap packages.
 
 - Every bootstrap package can be reproduced exactly via the package tree itself allowing total auditability.
 
 - Every download can be mirrored over p2p networks and self hosted, there is no central server that can prevent packages from compiling.
+
+- Packages can easily be exported to virtual environments, tarballs and docker containers.
 
 ## Getting started
 
