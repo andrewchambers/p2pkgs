@@ -1,2 +1,12 @@
 ../oksh
 ../gnu-base
+../musl
+../binutils
+../gcc
+../linux-headers
+../cmake
+../make
+../python3
+../rust-seed
+../openssl
+../zlib

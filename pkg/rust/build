@@ -1,10 +1,54 @@
 #!/bin/sh
 set -eux
+
 tar xf *
 rm *.tar.gz
 cd *
-sh install.sh \
-      --disable-ldconfig \
-      --prefix="" \
-      --destdir="$DESTDIR" \
-      --components="rustc,cargo,rust-std-x86_64-unknown-linux-musl"
+
+export RUST_BACKTRACE=1
+cat <<EOF > config.toml
+[llvm]
+
+static-libstdcpp = true
+
+[build]
+
+build = "x86_64-unknown-linux-musl"
+cargo = "/bin/cargo"
+rustc = "/bin/rustc"
+docs = false
+submodules = false
+extended = true
+vendor = true
+verbose = 2
+print-step-timings = true
+
+[install]
+
+prefix = "/"
+sysconfdir = "/etc"
+
+[rust]
+
+lld = false
+default-linker = "gcc"
+channel = "stable"
+verbose-tests = true
+codegen-backends = ["llvm"]
+
+[target.x86_64-unknown-linux-musl]
+
+cc = "gcc"
+cxx = "g++"
+ar = "ar"
+ranlib = "ranlib"
+linker = "gcc"
+crt-static = false
+musl-root = "/"
+
+[dist]
+
+EOF
+
+export PYTHONHOME="/"
+python x.py install
