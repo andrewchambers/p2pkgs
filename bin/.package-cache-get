@@ -26,21 +26,21 @@ ipfsget () {
   exit 0
 }
 
-case "$PKG_BINARY_CACHE_URL" in
+case "$PACKAGE_CACHE_URL" in
   ipfs://*)
     set +e
-    ipfsget "/ipfs/${PKG_BINARY_CACHE_URL#ipfs://}/$tar" "$out"
+    ipfsget "/ipfs/${PACKAGE_CACHE_URL#ipfs://}/$tar" "$out"
     exit "$?"
   ;;
   ipns://*)
     set +e
-    ipfsget "/ipns/${PKG_BINARY_CACHE_URL#ipns://}/$tar" "$out"
+    ipfsget "/ipns/${PACKAGE_CACHE_URL#ipns://}/$tar" "$out"
     exit "$?"
   ;;
   *)
     set +e
-    url="$PKG_BINARY_CACHE_URL/$tar"
-    out="$(curl -s -D - --fail -o "$out" -L "$PKG_BINARY_CACHE_URL/$tar")"
+    url="$PACKAGE_CACHE_URL/$tar"
+    out="$(curl -s -D - --fail -o "$out" -L "$PACKAGE_CACHE_URL/$tar")"
     rc="$?"
     set -e
     if test "$rc" != "0"

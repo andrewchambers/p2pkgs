@@ -13,23 +13,23 @@ cd $pkgdir
 redo-ifchange .pkghash .bclosure .closure
 redo-ifchange $(cat .closure)
 
-if test -n "${PKG_BINARY_CACHE_URL:-}"
+if test -n "${PACKAGE_CACHE_URL:-}"
 then
   cachetar="$(cat .pkghash).tar.gz"
   set +e
-  "$startdir"/../bin/.bin-cache-get "$cachetar" "$out"
+  "$startdir"/../bin/.package-cache-get "$cachetar" "$out"
   rc="$?"
   set -e
   case "$rc" in
     2)
-      echo "binary cache miss..." >&2
+      echo "package cache miss..." >&2
     ;;
     0)
       redo-stamp < "$out"
       exit 0
     ;;
     *)
-      echo "binary cache lookup failed, aborting" >&2
+      echo "package cache lookup failed, aborting" >&2
       exit 1
     ;;
   esac

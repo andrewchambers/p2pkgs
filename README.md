@@ -1,7 +1,7 @@
 # coolports
 
 A *simple*, *auditable*, *source based*, package system with an optional
-*self hostable* binary cache to accelerate package builds.
+*self hostable* package cache to accelerate package builds.
 
 Every precompiled binary it depends on can be reproduced exactly via the package tree itself allowing total auditability.
 
@@ -52,7 +52,7 @@ creating a binary cache.
 Generate the package tarballs and serve them over http:
 
 ```
-$ ./bin/add-to-binary-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
+$ ./bin/add-to-package-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
 $ cd /path/to/cache-dir
 $ python3 -m http.server --bind 127.0.0.1
 Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)
@@ -70,7 +70,7 @@ $ redo ./pkg/gcc/.pkg.tar.gz
 We support peer to peer binary caches via IPFS/IPNS (requires ipfs installed):
 
 ```
-$ ./bin/add-to-binary-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
+$ ./bin/add-to-package-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
 $ cd /path/to/cache-dir
 $ cid=$(ipfs add -Q -r .)
 ```
@@ -86,7 +86,15 @@ You can use ipns too:
 
 ```
 $ cid=$(ipfs add -Q -r .)
-$ export PKG_BINARY_CACHE_URL="ipfs://$(ipns name publish $cid)"
+$ export PKG_BINARY_CACHE_URL="ipns://$(ipns name publish $cid)"
+```
+
+### Known package caches
+
+Development package cache by Andrew Chambers:
+
+```
+ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
 ```
 
 ## Mirroring the repository
