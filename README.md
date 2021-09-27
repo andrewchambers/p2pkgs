@@ -70,7 +70,7 @@ Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)
 Use the binary cache:
 
 ```
-$ export PKG_BINARY_CACHE_URL="http://127.0.0.1:8000"
+$ export PACKAGE_CACHE_URL="http://127.0.0.1:8000"
 $ redo ./pkg/gcc/.pkg.tar.gz
 ```
 
@@ -87,7 +87,7 @@ $ cid=$(ipfs add -Q -r .)
 Use the binary cache (requires ipfs installed):
 
 ```
-$ export PKG_BINARY_CACHE_URL="ipfs://$cid"
+$ export PACKAGE_CACHE_URL="ipfs://$cid"
 $ redo ./pkg/gcc/.pkg.tar.gz
 ```
 
@@ -95,7 +95,7 @@ You can use ipns too:
 
 ```
 $ cid=$(ipfs add -Q -r .)
-$ export PKG_BINARY_CACHE_URL="ipns://$(ipns name publish $cid)"
+$ export PACKAGE_CACHE_URL="ipns://$(ipns name publish $cid)"
 ```
 
 ### Known package caches
