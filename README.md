@@ -11,7 +11,7 @@ precompiled package cache and optional p2p mirroring.
 
 - Every download can be mirrored over p2p networks and self hosted, there is no central server that can prevent packages from compiling.
 
-- Packages can easily be exported to virtual environments, tarballs and docker containers.
+- Packages can easily be exported to virtual environments, tarballs, docker containers and anything else you need.
 
 ## Getting started
 
