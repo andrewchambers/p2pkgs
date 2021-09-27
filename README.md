@@ -1,7 +1,7 @@
 # coolports
 
-A *simple*, *auditable*, *source based*, package system with an optional
-*self hostable* package cache and optional *p2p mirroring*.
+A simple, auditable, source based, package system with an optional
+precompiled package cache and optional p2p mirroring.
 
 ## Key features
 
