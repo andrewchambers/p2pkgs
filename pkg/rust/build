@@ -9,6 +9,7 @@ export RUST_BACKTRACE=1
 cat <<EOF > config.toml
 [llvm]
 
+ninja = false
 static-libstdcpp = true
 
 [build]
@@ -51,4 +52,4 @@ musl-root = "/"
 EOF
 
 export PYTHONHOME="/"
-python x.py install
+python3 x.py install
