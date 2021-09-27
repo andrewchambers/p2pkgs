@@ -22,7 +22,7 @@ Install the dependencies:
 
 Optional dependencies:
 
-- [ipfs](https://ipfs.io) Used for peer to peer package caches and source mirrors.
+- [ipfs](https://ipfs.io) used for peer to peer package caches and source mirrors.
 
 
 [1] We provide ./bin/do as an included version that lacks incremental builds, but will work for building single packages.

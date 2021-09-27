@@ -2,7 +2,6 @@
 
 The package tree is a *just* redo based build system, this means it is simple and flexible. To build anything in the package tree, you run `redo $path` without exception.
 
-
 ## Package files
 
 - ./pkg/$name/build-deps
@@ -29,6 +28,10 @@ Each package has has a few computed targets you can build manually:
 - ./pkg/$name/.pkg.tar.gz
   - The actual package contents once build.
 
+## Package caching
+
+Because we have a .pkghash uniquely representing each package, we can simply skip
+package builds if $PACKAGE_CACHE_URL/$HASH.tar.gz exists.
 
 ## P2P mirrors
 
