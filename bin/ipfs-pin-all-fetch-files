@@ -3,8 +3,12 @@
 set -eu
 
 dir="$(cd "$(dirname "$0")"; pwd)";
+ipfsrec="$(realpath $dir/../mirrors/ipfs)"
 pkgdir=$(realpath $dir/../pkg)
+
 for f in $(find "$pkgdir" -not -path '*/\.*' -name "fetch" ) 
 do
   "$dir/ipfs-pin-fetch-file" "$f"
 done
+
+TMPDIR="$dir" recfix --sort "$ipfsrec"

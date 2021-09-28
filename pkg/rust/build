@@ -7,6 +7,9 @@ cd *
 
 export RUST_BACKTRACE=1
 cat <<EOF > config.toml
+
+changelog-seen = 2
+
 [llvm]
 
 ninja = false

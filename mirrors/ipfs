@@ -12,6 +12,14 @@ source_url: http://ftp.gnu.org/gnu/gcc/gcc-11.1.0/gcc-11.1.0.tar.xz
 sha256: 4c4a6fb8a8396059241c2e674b85b351c26a5d678274007f076957afa1cc9ddf
 cid: QmbJkwhifN3LM9LtVjDYZJ7dSBmAxarQF4MsbXPJyXpvH2
 
+source_url: http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
+sha256: 768ffab457b90a20a6d895c39749adb547c1b7cb5c108e84b151a838a23ccf31
+cid: QmS8XqdpJ6yUVwpfh9gErE8FjrHx2SFvfUx2ELiWYrK4aP
+
+source_url: https://distfiles.dereferenced.org/pkgconf/pkgconf-1.6.3.tar.xz
+sha256: 61f0b31b0d5ea0e862b454a80c170f57bad47879c0c42bd8de89200ff62ea210
+cid: QmdB6f9sQZurX4rfnpr68GwYr3o8aWMXK6hLkD84korTF2
+
 source_url: https://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.gz
 sha256: c44968b97cd86499efbc4b4ab7d98471f673e5414c554ef54afa930062dbbfcb
 cid: QmX8E9WoQhRMkcYf8eBYuFbQyEQW4K2wKrRXdsCrS43Bwi
@@ -68,6 +76,14 @@ source_url: https://github.com/Kitware/CMake/releases/download/v3.17.2/cmake-3.1
 sha256: fc77324c4f820a09052a7785549b8035ff8d3461ded5bbd80d252ae7d1cd3aa5
 cid: QmcpnbQdu1F7ea97YKBd3S4A8Qibm6kXbikxr24byng1rb
 
+source_url: https://github.com/andrewchambers/coolports/raw/4ea7ac0da2a9cb2f667796bb2e5d4f93376c62da/rust-seed.tar.gz
+sha256: f5db89a78d518d8a3ca4185a58a85fdf0d9f1af51b996d598ac838133cc2a662
+cid: QmaVzmivwVCyKm68o1zKt8HystoUZmVRUMeXQZaiX5euPo
+
+source_url: https://github.com/andrewchambers/coolports/raw/5dd35e46bcf2b3303f9a2d89540828a92765b3a2/seed.tar.gz
+sha256: 551a8063baca5ec430d8967810cabdb9e5b4ead12c5eeea925165e8711d941a8
+cid: Qma2d8Kk4YvfNYd8Q76mLgoKuhmuEZGd9VaimQHDjQQvr6
+
 source_url: https://github.com/ibara/oksh/releases/download/oksh-6.9/oksh-6.9.tar.gz
 sha256: c08d97b2ac9ee5d88e9e508d27c75502b2d06c20d4c5ab87b496cb3b9951bd35
 cid: QmdZ5a6v3ZpgWdsAhkUwGHyWD7wspxmgyTBqX72VQNF9cy
@@ -88,9 +104,9 @@ source_url: https://musl.libc.org/releases/musl-1.2.2.tar.gz
 sha256: 9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd
 cid: QmWotMZZFdS7rPNu3Y58WL1NaVXKLJH195pcvR4oMEdZQE
 
-source_url: https://static.rust-lang.org/dist/rust-1.55.0-x86_64-unknown-linux-musl.tar.gz
-sha256: f24f68587253c4bfbe59d3d10fe4897068d9130538de6b2d02097a25718030c2
-cid: QmU6hZUETaCA4dipiw4dZ2L6pZmG46wcMHdUamwWz33nVn
+source_url: https://static.rust-lang.org/dist/rustc-1.55.0-src.tar.gz
+sha256: b2379ac710f5f876ee3c3e03122fe33098d6765d371cac6c31b1b6fc8e43821e
+cid: QmVhfm3mgKeNygCrNsKjhvtgRjY2w2PsEnpBWC6fLRjKWx
 
 source_url: https://tukaani.org/xz/xz-5.2.5.tar.gz
 sha256: f6f4910fd033078738bd82bfba4f49219d03b17eb0794eb91efbae419f4aba10
@@ -108,26 +124,10 @@ source_url: https://www.openssl.org/source/openssl-1.1.1g.tar.gz
 sha256: ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46
 cid: QmTxXRjXjhGG2KhVexnrSeFSuVW5wBNseLcEyFyY75VRsZ
 
-source_url: https://www.zlib.net/zlib-1.2.11.tar.gz
-sha256: c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
-cid: QmVUxkKQnLaiWK7nSwMFQ97LYSeGuwtRFjhw9ooMpJd5Gr
-
 source_url: https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz
 sha256: 6af6d4d2e010f9655518d0fc6738c7ff7069f10a4d2fbd55509e467f092a8b90
 cid: QmQCq8EBVqDM5PYyWeEzmHoqByKSMLCGYt9Qqmo22kcFPu
 
-source_url: https://static.rust-lang.org/dist/rustc-1.55.0-src.tar.gz
-sha256: b2379ac710f5f876ee3c3e03122fe33098d6765d371cac6c31b1b6fc8e43821e
-cid: QmVhfm3mgKeNygCrNsKjhvtgRjY2w2PsEnpBWC6fLRjKWx
-
-source_url: https://distfiles.dereferenced.org/pkgconf/pkgconf-1.6.3.tar.xz
-sha256: 61f0b31b0d5ea0e862b454a80c170f57bad47879c0c42bd8de89200ff62ea210
-cid: QmdB6f9sQZurX4rfnpr68GwYr3o8aWMXK6hLkD84korTF2
-
-source_url: https://github.com/andrewchambers/coolports/raw/5dd35e46bcf2b3303f9a2d89540828a92765b3a2/seed.tar.gz
-sha256: 551a8063baca5ec430d8967810cabdb9e5b4ead12c5eeea925165e8711d941a8
-cid: Qma2d8Kk4YvfNYd8Q76mLgoKuhmuEZGd9VaimQHDjQQvr6
-
-source_url: https://github.com/andrewchambers/coolports/raw/5dd35e46bcf2b3303f9a2d89540828a92765b3a2/rust-seed.tar.gz
-sha256: d22fd8361c2403baf5924c3cda019aaace1545d6aeddc36cbc49bcc1f13be269
-cid: QmUnJi6syw35tyYhMp9YuK9kjjadXWEFsWNL6WLSegeSje
+source_url: https://www.zlib.net/zlib-1.2.11.tar.gz
+sha256: c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
+cid: QmVUxkKQnLaiWK7nSwMFQ97LYSeGuwtRFjhw9ooMpJd5Gr

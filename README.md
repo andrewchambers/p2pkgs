@@ -7,7 +7,7 @@ precompiled package cache and optional p2p mirroring.
 
 - Everything is built from source except a small set of well defined bootstrap packages.
 
-- Every bootstrap package can be reproduced exactly via the package tree itself allowing total auditability.
+- Every bootstrap package can be reproduced exactly via the package tree itself.
 
 - Every download can be mirrored over p2p networks and self hosted, there is no central server that can prevent packages from compiling.
 
@@ -112,7 +112,7 @@ ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
 
 If you want to help our project and mirror all our source dependencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
 
-Alternatively you read the cids listed in ./mirrors/ipfs and decide which ones you
+Alternatively you can read the cids listed in ./mirrors/ipfs and decide which ones you
 want to mirror.
 
 
