@@ -91,13 +91,13 @@ binds=$(
 )
 
 # Only pass through job server MAKEFLAGS.
-JOBSERVER_AUTH=""
+PKG_JOBSERVER=""
 BUILD_MAKEFLAGS=""
 for flag in ${MAKEFLAGS:-}
 do
   case "$flag" in
     --jobserver-auth=*)
-      JOBSERVER_AUTH="${flag#--jobserver-auth=}"
+      PKG_JOBSERVER="${flag#--jobserver-auth=}"
       BUILD_MAKEFLAGS="-j $flag"
       break
     ;;
@@ -117,7 +117,7 @@ env -i bwrap \
   --setenv "HOME" /home/build \
   --setenv "PATH" /bin:/usr/bin \
   --setenv "DESTDIR" /destdir \
-  --setenv "JOBSERVER_AUTH" "$JOBSERVER_AUTH" \
+  --setenv "PKG_JOBSERVER" "$PKG_JOBSERVER" \
   --setenv "MAKEFLAGS" "$BUILD_MAKEFLAGS" \
   -- /build 1>&2
 
