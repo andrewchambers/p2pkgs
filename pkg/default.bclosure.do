@@ -8,8 +8,15 @@ out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
 
+if test -e build-deps
+then
+  redo-ifchange build-deps
+else
+  redo-ifcreate build-deps
+fi
+
 builddepclosures=$((test -e build-deps && cat build-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
-redo-ifchange .pkghash $builddepclosures
+redo-ifchange $builddepclosures
 
 (
   set -e

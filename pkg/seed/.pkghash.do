@@ -1,9 +1,9 @@
 #!/bin/sh
 set -eu
-redo-ifchange .pkg.tar.gz
+redo-ifchange fetch
 (
   set -e
   echo chash # Content hash tag.
-  sha256sum .pkg.tar.gz
-) | cut -c -64 > $3
+  recsel -C -P sha256 fetch
+) | sha256sum | cut -c -64 > $3
 redo-stamp < $3

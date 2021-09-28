@@ -10,7 +10,8 @@ startdir="$PWD"
 out=$(realpath $3)
 pkgdir=$(dirname $(realpath $1))
 cd $pkgdir
-redo-ifchange .pkghash .bclosure .closure
+
+redo-ifchange .pkghash .closure
 redo-ifchange $(cat .closure)
 
 if test -n "${PACKAGE_CACHE_URL:-}"
@@ -35,15 +36,14 @@ then
   esac
 fi
 
-test -e "$out" && rm "$out"
-
 if test "${PKG_FORCE_BINARY_PACKAGES:-}" = "yes"
 then
   echo "PKG_FORCE_BINARY_PACKAGES is 'yes' and the binary cache lookup failed" 1>&2
   exit 1
 fi
 
-# Download failed, we do need the build closure.
+# Download not possible, we now need the build closure.
+redo-ifchange .bclosure
 redo-ifchange $(cat .bclosure)
 
 "$startdir"/../bin/do-fetch fetch
@@ -90,13 +90,15 @@ binds=$(
   done
 )
 
-# Only keep the job server MAKEFLAGS.
+# Only pass through job server MAKEFLAGS.
+JOBSERVER_AUTH=""
 BUILD_MAKEFLAGS=""
-for flag in "${MAKEFLAGS:-}"
+for flag in ${MAKEFLAGS:-}
 do
   case "$flag" in
     --jobserver-auth=*)
-      BUILD_MAKEFLAGS="$flag"
+      JOBSERVER_AUTH="${flag#--jobserver-auth=}"
+      BUILD_MAKEFLAGS="-j $flag"
       break
     ;;
   esac
@@ -115,6 +117,7 @@ env -i bwrap \
   --setenv "HOME" /home/build \
   --setenv "PATH" /bin:/usr/bin \
   --setenv "DESTDIR" /destdir \
+  --setenv "JOBSERVER_AUTH" "$JOBSERVER_AUTH" \
   --setenv "MAKEFLAGS" "$BUILD_MAKEFLAGS" \
   -- /build 1>&2
 

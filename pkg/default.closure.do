@@ -8,8 +8,15 @@ out=$(realpath $3)
 pkgdir="$(dirname $(realpath $1))"
 cd $pkgdir
 
-redo-ifchange .pkghash
+if test -e run-deps
+then
+  redo-ifchange run-deps
+else
+  redo-ifcreate run-deps
+fi
+
 depclosures=$((test -e run-deps && cat run-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
+
 redo-ifchange $depclosures
 
 (
