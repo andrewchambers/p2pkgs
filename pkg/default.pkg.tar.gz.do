@@ -86,9 +86,21 @@ binds=$(
   set -e
   for toplevel in $(ls .build/chroot)
   do
-    echo --bind .build/chroot/$toplevel $toplevel
+    echo --bind ".build/chroot/$toplevel" "$toplevel"
   done
 )
+
+# Only keep the job server MAKEFLAGS.
+BUILD_MAKEFLAGS=""
+for flag in "${MAKEFLAGS:-}"
+do
+  case "$flag" in
+    --jobserver-auth=*)
+      BUILD_MAKEFLAGS="$flag"
+      break
+    ;;
+  esac
+done
 
 env -i bwrap \
   --unshare-user \
@@ -103,6 +115,7 @@ env -i bwrap \
   --setenv "HOME" /home/build \
   --setenv "PATH" /bin:/usr/bin \
   --setenv "DESTDIR" /destdir \
+  --setenv "MAKEFLAGS" "$BUILD_MAKEFLAGS" \
   -- /build 1>&2
 
 # XXX whitelist of allowed output dirs?
