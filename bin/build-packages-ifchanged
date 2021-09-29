@@ -1,7 +1,7 @@
-#! /bin/sh
+#!/bin/sh
 
 # Create a temporary do script so we can use the redo -j option
-# in conjunction with redo-ifchange, which takes no options.
+# in conjunction with redo-ifchange (which takes no options).
 
 set -eu
 
@@ -24,8 +24,10 @@ do
 done
 shift $((OPTIND-1))
 
-doscript="$(mktemp build-packages.XXXXXXX.do)"
-trap "rm $doscript" EXIT
+dir="$(cd "$(dirname "$0")"; pwd)"
+tmpdir="$(realpath "$dir/..")"
+doscript="$(mktemp "$tmpdir/build-packages.XXXXXX.do")"
+trap "rm -rf $doscript" EXIT
 
 cat <<EOF > "$doscript"
 #!/bin/sh
