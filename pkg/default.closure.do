@@ -24,4 +24,3 @@ redo-ifchange $depclosures
   cat $depclosures < /dev/null
   (test -e run-deps && cat run-deps) | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
 ) | sort -u > $out
-redo-stamp < $out

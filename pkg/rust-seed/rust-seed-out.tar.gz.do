@@ -2,4 +2,4 @@
 set -eux
 
 redo-ifchange ../rust/.pkg.tar.gz
-ln ../rust/.pkg.tar.gz "$3"
+ln -f ../rust/.pkg.tar.gz "$3"

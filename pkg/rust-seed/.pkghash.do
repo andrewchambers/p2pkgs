@@ -6,4 +6,3 @@ redo-ifchange fetch
   echo chash # Content hash tag.
   recsel -C -P sha256 fetch
 ) | sha256sum | cut -c -64 > $3
-redo-stamp < $3

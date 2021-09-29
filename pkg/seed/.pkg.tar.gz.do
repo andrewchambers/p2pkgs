@@ -2,5 +2,4 @@
 set -eu
 redo-ifchange .pkghash
 ../../bin/do-fetch fetch
-ln .fetch/seed.tar.gz "$3"
-redo-stamp < "$3"
+ln -f .fetch/seed.tar.gz "$3"

@@ -23,4 +23,3 @@ redo-ifchange $builddepclosures
   (test -e build-deps && cat build-deps) | sed -e 's,$,/.pkg.tar.gz,' | xargs -r realpath
   cat $builddepclosures < /dev/null
 ) | sort -u > $out
-redo-stamp < $out

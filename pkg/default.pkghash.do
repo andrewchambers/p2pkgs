@@ -123,5 +123,3 @@ fi
   echo build-deps
   cat $builddephashes < /dev/null
 ) | sha256sum | cut -c -64 > $out
-
-redo-stamp < $out

@@ -26,7 +26,6 @@ then
       echo "package cache miss..." >&2
     ;;
     0)
-      redo-stamp < "$out"
       exit 0
     ;;
     *)
@@ -136,5 +135,3 @@ tar \
 
 chmod -R 700 .build
 rm -rf .build
-
-redo-stamp < "$out"
