@@ -31,7 +31,7 @@ Each package has has a few computed targets you can build manually:
 ## Package caching
 
 Because we have a .pkghash uniquely representing each package, we can simply skip
-package builds if $PACKAGE_CACHE_URL/$HASH.tar.gz exists.
+package builds if $PKG_CACHE_URL/$HASH.tar.gz exists.
 
 ## P2P mirrors
 
