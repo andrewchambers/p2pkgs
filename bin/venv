@@ -59,22 +59,22 @@ cat <<EOF  > "$out/bin/venv-run"
 
 set -eu
 
-unset host_binds
-unset venv_binds
+host_binds=
+venv_binds=
 
 for b in \$(ls /)
 do
-  host_binds+=(--dev-bind "/\$b" "/\$b")
+  host_binds="\$host_binds --dev-bind /\$b /\$b"
 done
 
 for b in \$(ls "$out")
 do
-  venv_binds+=(--dev-bind "$out/\$b" "/\$b")
+  venv_binds="\$venv_binds --dev-bind $out/\$b /\$b"
 done
 
 exec bwrap \\
-  "\${host_binds[@]}" \\
-  "\${venv_binds[@]}" \\
+  \$host_binds \\
+  \$venv_binds \\
   --chdir "\$PWD" \\
   -- "\$@"
 EOF
