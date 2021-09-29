@@ -53,9 +53,10 @@ then
   rm -rf .build
 fi
 
-for dir in bin lib libexec usr etc share include var run tmp home destdir; do
-  mkdir -p .build/chroot/$dir
-done
+mkdir -p .build/chroot
+cd .build/chroot
+mkdir bin lib libexec usr etc share include var run tmp home destdir
+cd ../../
 
 cp build .build
 cp -r .fetch .build/chroot/home/build
