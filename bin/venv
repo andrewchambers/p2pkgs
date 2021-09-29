@@ -9,7 +9,7 @@ usage() {
 
 dir="$(cd "$(dirname "$0")"; pwd)"
 out="./venv"
-j=1
+parallelism=
 while getopts "o:j:" o
 do
   case "$o" in
@@ -17,7 +17,7 @@ do
       out="${OPTARG}"
       ;;
     j)
-    parallelism="${OPTARG}"
+      parallelism="-j${OPTARG}"
       ;;
     *)
       usage
@@ -34,7 +34,7 @@ then
   exit 1
 fi
 
-"$dir/build-packages-ifchanged" -j "$parallelism" $pkgs
+"$dir/build-packages-ifchanged" $parallelism $pkgs
 
 tars="$(
   set -e
