@@ -55,5 +55,5 @@ do
   fi
   echo "copying $tar to $outtar"
   cp "$tar" "$outtar.tmp"
-  cp "$outtar.tmp" "$outtar"
+  mv "$outtar.tmp" "$outtar"
 done
