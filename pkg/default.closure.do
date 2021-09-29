@@ -15,7 +15,7 @@ else
   redo-ifcreate run-deps
 fi
 
-depclosures=$((test -e run-deps && cat run-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
+depclosures=$( (test -e run-deps && cat run-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
 
 redo-ifchange $depclosures
 

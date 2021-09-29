@@ -15,7 +15,7 @@ else
   redo-ifcreate build-deps
 fi
 
-builddepclosures=$((test -e build-deps && cat build-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
+builddepclosures=$( (test -e build-deps && cat build-deps) | sed -e 's,$,/.closure,' | xargs -r realpath)
 redo-ifchange $builddepclosures
 
 (
