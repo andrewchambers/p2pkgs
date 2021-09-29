@@ -25,8 +25,8 @@ done
 shift $((OPTIND-1))
 
 dir="$(cd "$(dirname "$0")"; pwd)"
-tmpdir="$(realpath "$dir/..")"
-doscript="$(mktemp "$tmpdir/build-packages.XXXXXX.do")"
+projectroot="$(realpath "$dir/..")"
+doscript="$(mktemp "$projectroot/.build-packages.XXXXXX.do")"
 trap "rm -rf $doscript" EXIT
 
 cat <<EOF > "$doscript"
