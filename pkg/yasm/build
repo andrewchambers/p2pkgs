@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.gz
+cd *
+export LDFLAGS="--static"
+./configure --prefix=""
+make install
