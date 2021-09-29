@@ -1,0 +1,5 @@
+../bash
+../gnu-base
+../gcc
+../binutils
+../musl

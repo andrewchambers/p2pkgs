@@ -1,0 +1,5 @@
+url: https://dl.google.com/go/go1.4-bootstrap-20171003.tar.gz
+sha256: f4ff5b5eb3a3cae1c993723f3eab519c5bae18866b5e5f96fe1102f0cb5c3e52
+
+url: https://golang.org/dl/go1.17.1.src.tar.gz
+sha256: 49dc08339770acd5613312db8c141eaf61779995577b89d93b541ef83067e5b1

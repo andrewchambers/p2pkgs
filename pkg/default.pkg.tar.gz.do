@@ -118,6 +118,7 @@ env -i bwrap \
   --chdir /home/build \
   --setenv "HOME" /home/build \
   --setenv "PATH" /bin:/usr/bin \
+  --setenv "TMPDIR" /tmp \
   --setenv "DESTDIR" /destdir \
   --setenv "PKG_JOBSERVER" "$PKG_JOBSERVER" \
   --setenv "MAKEFLAGS" "$BUILD_MAKEFLAGS" \

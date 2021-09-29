@@ -1,0 +1,22 @@
+#!/bin/bash
+set -eux
+tar xf go1.4-*.tar.gz
+rm go1.4-*.tar.gz
+mv go goboostrap
+cd goboostrap/src
+bash ./make.bash
+cd ..
+export GOROOT_BOOTSTRAP="$(pwd)"
+cd ..
+tar xf *.tar.gz
+cd go/src
+export GOROOT_FINAL=/lib/go
+bash ./make.bash
+cd ../..
+mkdir "$DESTDIR"/{lib,bin}
+mv go "$DESTDIR/lib"
+cd "$DESTDIR/bin"
+for b in go gofmt
+do
+  ln -s ../lib/go/bin/$b $b
+done
