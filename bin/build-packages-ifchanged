@@ -31,7 +31,7 @@ trap "rm -rf $doscript" EXIT
 
 cat <<EOF > "$doscript"
 #!/bin/sh
-exec redo-ifchange $(printf '%q/.pkg.tar.gz ' $@)
+exec redo-ifchange $(printf '%s/.pkg.tar.gz' $@)
 EOF
 
 set +e
