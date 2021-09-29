@@ -45,12 +45,13 @@ in the requested packages, this allows very lightweight use of package environme
 ## Building a package
 
 ```
-$ redo-ifchange ./pkg/make/.pkg.tar.gz
-...
+./bin/build-packages-ifchange ./pkg/{make,oksh}
+```
 
-# View package runtime dependencies
-$ cat ./pkg/perl/.closure
-./pkg/musl/.pkg.tar.gz
+or:
+
+```
+$ redo -j $(nproc) ./pkg/make/.pkg.tar.gz
 ```
 
 ## Setting up a binary cache
@@ -100,7 +101,7 @@ $ cid=$(ipfs add -Q -r .)
 $ export PACKAGE_CACHE_URL="ipns://$(ipns name publish $cid)"
 ```
 
-### Known package caches
+### Public package caches
 
 Development package cache hosted by Andrew Chambers:
 
