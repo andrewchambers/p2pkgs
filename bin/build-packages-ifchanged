@@ -1,0 +1,37 @@
+#! /bin/sh
+
+# Create a temporary do script so we can use the redo -j option
+# in conjunction with redo-ifchange, which takes no options.
+
+set -eu
+
+usage() {
+  echo "Usage: $0 [-j parallelism] pkgs..." 1>&2
+  exit 1
+}
+
+parallelism="1"
+while getopts "j:" o
+do
+  case $o in
+    j)
+      parallelism="${OPTARG}"
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+doscript="$(mktemp build-packages.XXXXXXX.do)"
+trap "rm $doscript" EXIT
+
+cat <<EOF > "$doscript"
+#!/bin/sh
+exec redo-ifchange $(printf '%q/.pkg.tar.gz ' $@)
+EOF
+
+set +e
+redo -j "$parallelism" "${doscript%.do}"
+exit "$?"

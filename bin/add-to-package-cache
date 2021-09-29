@@ -3,16 +3,21 @@
 set -eu
 
 usage() {
-  echo "Usage: $0 [-o dir] pkgs..." 1>&2
+  echo "Usage: $0 [-o dir] [-j parallelism] pkgs..." 1>&2
   exit 1
 }
 
+dir="$(cd "$(dirname "$0")"; pwd)"
 out=""
-while getopts "o:" o
+parallelism="1"
+while getopts "o:j:" o
 do
   case "$o" in
     o)
       out=${OPTARG}
+      ;;
+    j)
+      parallelism=${OPTARG}
       ;;
     *)
       usage
@@ -20,23 +25,16 @@ do
   esac
 done
 
+shift $((OPTIND-1))
+pkgs=$@
+
 if test -z "${out}"
 then
   echo "You must specify a cache output dir with -o" 1>&2
   exit 1
 fi
 
-shift $((OPTIND-1))
-
-pkgs=$@
-
-redo-ifchange $(
-  set -e
-  for pkg in $pkgs
-  do
-    echo "$pkg/.pkg.tar.gz"
-  done
-)
+"$dir/build-packages-ifchanged" -j "$parallelism" $pkgs
 
 tars="$(
   set -e
@@ -51,8 +49,11 @@ mkdir -p "$out"
 for tar in $tars
 do
   outtar="$out/$(cat $(dirname $tar)/.pkghash).tar.gz"
-  if ! test -e "$outtar"
+  if test -e "$outtar"
   then
-    cp "$tar" "$outtar"
+    continue
   fi
+  echo "copying $tar to $outtar"
+  cp "$tar" "$outtar.tmp"
+  cp "$outtar.tmp" "$outtar"
 done

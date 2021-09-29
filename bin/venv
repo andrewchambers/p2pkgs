@@ -1,13 +1,23 @@
 #!/bin/sh
 
-set -eux
+set -eu
 
+usage() {
+  echo "Usage: $0 [-o dir] [-j parallelism] pkgs..." 1>&2
+  exit 1
+}
+
+dir="$(cd "$(dirname "$0")"; pwd)"
 out="./venv"
-while getopts "o:" o
+j=1
+while getopts "o:j:" o
 do
   case "$o" in
     o)
-      out=${OPTARG}
+      out="${OPTARG}"
+      ;;
+    j)
+    parallelism="${OPTARG}"
       ;;
     *)
       usage
@@ -15,6 +25,7 @@ do
   esac
 done
 
+shift $((OPTIND-1))
 pkgs=$@
 
 if test -e "$out"
@@ -23,13 +34,7 @@ then
   exit 1
 fi
 
-redo-ifchange $(
-  set -e
-  for pkg in $pkgs
-  do
-    echo "$pkg/.pkg.tar.gz"
-  done
-)
+"$dir/build-packages-ifchanged" -j "$parallelism" $pkgs
 
 tars="$(
   set -e
