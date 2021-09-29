@@ -35,5 +35,5 @@ exec redo-ifchange $(printf '%s/.pkg.tar.gz' $@)
 EOF
 
 set +e
-redo -j "$parallelism" "${doscript%.do}"
+"${REDO:-redo}" -j "$parallelism" "${doscript%.do}"
 exit "$?"
