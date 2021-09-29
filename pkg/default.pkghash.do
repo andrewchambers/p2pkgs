@@ -108,15 +108,17 @@ fi
     # guaranteed to be the same for everyone,
     # this is currently just wrong.
     tar \
-        --format=posix \
-        --mtime='2021-01-01 00:00:00Z' \
-        --sort=name \
-        --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime \
-        --numeric-owner \
-        --owner=0 \
-        --group=0 \
-        -cf - \
-        .
+      -C files \
+      --format=posix \
+      --mtime='2021-01-01 00:00:00Z' \
+      --sort=name \
+      --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime \
+      --numeric-owner \
+      --owner=0 \
+      --group=0 \
+      -cf - \
+      .
+
   fi
   echo run-deps
   cat $rundephashes < /dev/null
