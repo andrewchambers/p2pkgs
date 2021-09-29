@@ -29,19 +29,6 @@ Optional dependencies:
 
 [1] We provide ./bin/do as an included version that lacks incremental builds, but will work for building single packages.
 
-## Running packages in a venv
-
-We support running packages in a container called a venv:
-
-```
-$ ./bin/venv ./pkg/{make,oksh,gnu-base}
-$ ./venv/bin/venv-run make --version
-GNU Make 4.2
-```
-
-The requested process is run in a linux user container with top level directories substituted for those
-in the requested packages, this allows very lightweight use of package environments.
-
 ## Building a package
 
 ```
@@ -53,6 +40,19 @@ or:
 ```
 $ redo -j $(nproc) ./pkg/make/.pkg.tar.gz
 ```
+
+## Running packages in a venv
+
+We support running packages in a container called a venv:
+
+```
+$ ./bin/venv -j $(nproc) ./pkg/{make,oksh,gnu-base}
+$ ./venv/bin/venv-run make --version
+GNU Make 4.2
+```
+
+The requested process is run in a linux user container with top level directories substituted for those
+in the requested packages, this allows very lightweight use of package environments.
 
 ## Setting up a binary cache
 
