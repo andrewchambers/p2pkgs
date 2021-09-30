@@ -92,19 +92,28 @@ binds=$(
   done
 )
 
+set -x
 # Only pass through job server MAKEFLAGS.
 PKG_JOBSERVER=""
 BUILD_MAKEFLAGS=""
-for flag in ${MAKEFLAGS:-}
-do
-  case "$flag" in
-    --jobserver-auth=*)
-      PKG_JOBSERVER="${flag#--jobserver-auth=}"
-      BUILD_MAKEFLAGS="-j $flag"
-      break
-    ;;
-  esac
-done
+if test -n "${MAKEFLAGS:-}"
+then
+  for flag in ${MAKEFLAGS:-}
+  do
+    case "$flag" in
+      --jobserver-auth=*)
+        PKG_JOBSERVER="${flag#--jobserver-auth=}"
+        BUILD_MAKEFLAGS="-j $flag"
+        break
+      ;;
+    esac
+  done
+elif test -n "${REDO_JS_FD:-}"
+then
+  REDO_JS_FD="$(echo -n $REDO_JS_FD)" # trim
+  PKG_JOBSERVER="$REDO_JS_FD"
+  BUILD_MAKEFLAGS="-j --jobserver-auth=$(echo "$REDO_JS_FD")"
+fi
 
 env -i bwrap \
   --unshare-user \

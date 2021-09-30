@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eux
+zstd -d *.zst
+rm *.zst
+tar -xf *.tar
+rm *.tar
+cd */src
+CGO_ENABLED=0 go build -mod=vendor
+mkdir "$DESTDIR/bin"
+mv ./goredo "$DESTDIR/bin"
+cd "$DESTDIR/bin"
+./goredo -symlinks

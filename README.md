@@ -18,7 +18,7 @@ precompiled package cache and optional p2p mirroring.
 Install the dependencies:
 
 - [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox.
-- [redo](https://github.com/apenwarr/redo)[1] to run build rules.
+- redo[1] to run build rules.
 - [curl](https://curl.se/) to download source tarballs.
 - [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
 
@@ -27,7 +27,11 @@ Optional dependencies:
 - [ipfs](https://ipfs.io) used for peer to peer package caches and source mirrors.
 
 
-[1] We provide ./bin/do as an included version that lacks incremental builds, but will work for building single packages.
+[1] We aim to support multiple redo implementations:
+
+- cypherpunks [goredo](http://www.goredo.cypherpunks.ru).
+- apenwarrs [redo](https://github.com/apenwarr/redo).
+- The bundled, but very limited [./bin/do](./bin/do).
 
 ## Building a package
 
