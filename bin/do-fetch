@@ -2,7 +2,7 @@
 
 # Fetch and verify the urls listed in the given rec file
 # and store them in $fetchdir/.fetch/*. Download will
-# prefer ipfs mirrors unless PKG_MIRROR_IPFS=off.
+# prefer ipfs mirrors unless PKG_MIRROR_IPFS=no.
 
 set -eu
 

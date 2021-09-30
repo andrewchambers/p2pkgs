@@ -42,7 +42,7 @@ They above list is order of preference.
 ## Building a package
 
 ```
-./bin/build-packages-ifchange ./pkg/{make,oksh}
+./bin/build-packages-ifchanged ./pkg/{make,oksh}
 ```
 
 or:
