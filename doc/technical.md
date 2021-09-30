@@ -1,4 +1,4 @@
-# How it works
+# Technical overview
 
 The package tree is a *just* redo based build system, this means it is simple and flexible. To build anything in the package tree, you run `redo $path` without exception.
 

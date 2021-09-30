@@ -64,70 +64,19 @@ GNU Make 4.2
 The requested process is run in a linux user container with top level directories substituted for those
 in the requested packages, this allows very lightweight use of package environments.
 
-## Setting up a binary cache
+## Setting up a package cache
 
-Some packages take a long time to build, you can avoid rebuilding it by
-creating a binary cache.
+To avoid compiling packages from source you can configure
+a package cache, which acts transparently but dramatically
+increases the build speed of cached packages.
 
-### HTTP(s) binary cache
+See the [package cache documentation](./doc/packagecaches.md) for
+more information.
 
-Generate the package tarballs and serve them over http:
+## Writing packages
 
-```
-$ ./bin/add-to-package-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
-$ cd /path/to/cache-dir
-$ python3 -m http.server --bind 127.0.0.1
-Serving HTTP on 127.0.0.1 port 8000 (http://127.0.0.1:8000/)
-```
+For more information about writing packages see the [packaging documentation](./doc/packaging.md).
 
-Use the binary cache:
+## Technical overview
 
-```
-$ export PKG_CACHE_URL="http://127.0.0.1:8000"
-$ redo ./pkg/gcc/.pkg.tar.gz
-```
-
-### IPFS binary cache
-
-We support peer to peer binary caches via IPFS/IPNS (requires ipfs installed):
-
-```
-$ ./bin/add-to-package-cache -o /path/to/cache-dir ./pkg/{gcc,binutils,musl}
-$ cd /path/to/cache-dir
-$ cid=$(ipfs add -Q -r .)
-```
-
-Use the binary cache (requires ipfs installed):
-
-```
-$ export PKG_CACHE_URL="ipfs://$cid"
-$ redo ./pkg/gcc/.pkg.tar.gz
-```
-
-You can use ipns too:
-
-```
-$ cid=$(ipfs add -Q -r .)
-$ export PKG_CACHE_URL="ipns://$(ipns name publish $cid)"
-```
-
-### Public package caches
-
-Development package cache hosted by Andrew Chambers:
-
-```
-ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
-```
-
-## Mirroring package source code
-
-If you want to help our project and mirror all our source dependencies, install and configure an ipfs daemon, then run `./bin/ipfs-pin-all-fetch-files`.
-
-Alternatively you can read the cids listed in ./mirrors/ipfs and decide which ones you
-want to mirror.
-
-## More Documentation
-
-For more information about writing packages see the [packaging documentation](./doc/packging.md).
-
-To see how it all works, check the [technical documentation](./doc/technical.md).
+To see how it all works, check the [technical overview](./doc/technical.md).

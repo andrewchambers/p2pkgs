@@ -1,5 +1,13 @@
 # Packaging
 
+Writing a package is relatively simple and
+follows a few basic steps...
+
+- Create a fetch file linking the source code.
+- Create a build-deps file listing the build dependencies.
+- Create a run-deps file listing the runtime dependencies.
+- Create a build file that actually builds and installs the package.
+
 ## Package Files
 
 ## build
@@ -7,22 +15,64 @@
 A script run inside the build sandbox that must build the package
 and install it into the staging directory $DESTDIR.
 
+example build file:
+
+```
+#!/bin/sh
+set -eux
+echo hello > "$DESTDIR/hello.txt"
+```
+
 ### run-deps
 
 A file containing relative paths to runtime dependencies, one per line. Newlines are not supported in package paths.
 
+example run-deps file:
+
+```
+../musl
+```
+
 ### build-deps
 
 A file containing relative paths to build dependencies, one per line. Newlines are not supported in package paths.
+
+example build-deps file:
+```
+../oksh
+../musl
+../binutils
+../gcc
+```
 
 ### fetch
 
 A rec file containing urls to download and sha256 sums to verify
 the downloads.
 
+example fetch file:
+```
+url: https://ftp.gnu.org/gnu/recutils/recutils-1.8.tar.gz
+sha256: df8eae69593fdba53e264cbf4b2307dfb82120c09b6fab23e2dad51a89a5b193
+```
+
 ### files
 
 A directory of files to include in the build environment in the working directory.
+
+example:
+
+```
+$ tree .
+.
+├── build
+├── build-deps
+├── fetch
+└── files
+    └── patch
+        ├── 0001.patch
+        └── 0002.patch
+```
 
 ## The build environment
 
@@ -45,7 +95,7 @@ PREFIX=
 DESTDIR=/destdir
 ```
 
-## Notes
+## Conventions
 
 ### Static linking
 
