@@ -26,7 +26,7 @@ do
 done
 
 shift $((OPTIND-1))
-pkgs=$@
+pkgs="$*"
 
 if test -z "${out}"
 then
@@ -40,15 +40,15 @@ tars="$(
   set -e
   for pkg in $pkgs
   do
-    echo $pkg/.pkg.tar.gz
-    cat $pkg/.closure
+    echo "$pkg/.pkg.tar.gz"
+    cat "$pkg/.closure"
   done | sort -u
 )"
 
 mkdir -p "$out"
 for tar in $tars
 do
-  outtar="$out/$(cat $(dirname $tar)/.pkghash).tar.gz"
+  outtar="$out/$(cat "$(dirname "$tar")"/.pkghash).tar.gz"
   if test -e "$outtar"
   then
     continue
