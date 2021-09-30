@@ -92,7 +92,6 @@ binds=$(
   done
 )
 
-set -x
 # Only pass through job server MAKEFLAGS.
 PKG_JOBSERVER=""
 BUILD_MAKEFLAGS=""
@@ -110,9 +109,8 @@ then
   done
 elif test -n "${REDO_JS_FD:-}"
 then
-  REDO_JS_FD="$(echo -n $REDO_JS_FD)" # trim
-  PKG_JOBSERVER="$REDO_JS_FD"
-  BUILD_MAKEFLAGS="-j --jobserver-auth=$(echo "$REDO_JS_FD")"
+  PKG_JOBSERVER="$(echo -n $REDO_JS_FD)" # trim
+  BUILD_MAKEFLAGS="-j --jobserver-auth=$(echo "$PKG_JOBSERVER")"
 fi
 
 env -i bwrap \

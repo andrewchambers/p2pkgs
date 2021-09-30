@@ -93,7 +93,6 @@ HOME=/home/build
 PKG_JOBSERVER="x,y"
 MAKEFLAGS="-j --jobserver-auth=$PKG_JOBSERVER"
 TMPDIR="/tmp"
-PREFIX=
 DESTDIR=/destdir
 ```
 

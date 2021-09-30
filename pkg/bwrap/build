@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.xz
+cd *
+export CFLAGS="-O2 --static"
+./configure --prefix=""
+make install-strip

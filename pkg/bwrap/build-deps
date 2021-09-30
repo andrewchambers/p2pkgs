@@ -1,0 +1,9 @@
+../oksh
+../make
+../gnu-base
+../gcc
+../xz
+../binutils
+../musl
+../linux-headers
+../libcap

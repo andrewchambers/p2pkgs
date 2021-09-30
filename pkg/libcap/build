@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.xz
+cd *
+make prefix="/" lib=lib RAISE_SETFCAP=no install

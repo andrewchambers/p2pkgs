@@ -4,4 +4,4 @@ tar xf *
 rm *.tar.gz
 cd *
 ./configure --prefix="" --disable-nls
-make install
+make install-strip
