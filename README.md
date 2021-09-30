@@ -75,10 +75,13 @@ more information.
 
 ### Public package caches
 
+Below are some public package caches, you should only use them
+if you trust the cache owner.
+
 Development package cache by Andrew Chambers:
 
 ```
-ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
+export PKG_CACHE_URL=ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
 ```
 
 ## Writing packages
