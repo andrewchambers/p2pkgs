@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eux
+tar xf *
+rm *.tar.gz
+cd *
+make install

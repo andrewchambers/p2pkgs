@@ -92,6 +92,10 @@ source_url: https://github.com/andrewchambers/coolports/raw/5dd35e46bcf2b3303f9a
 sha256: 551a8063baca5ec430d8967810cabdb9e5b4ead12c5eeea925165e8711d941a8
 cid: Qma2d8Kk4YvfNYd8Q76mLgoKuhmuEZGd9VaimQHDjQQvr6
 
+source_url: https://github.com/facebook/zstd/releases/download/v1.5.0/zstd-1.5.0.tar.gz
+sha256: 5194fbfa781fcf45b98c5e849651aa7b3b0a008c6b72d4a0db760f3002291e94
+cid: QmeLAGyCbRpkp6zFf2e1ZASSh6DRVV7GcHSwDgrKxvNWEa
+
 source_url: https://github.com/ibara/oksh/releases/download/oksh-6.9/oksh-6.9.tar.gz
 sha256: c08d97b2ac9ee5d88e9e508d27c75502b2d06c20d4c5ab87b496cb3b9951bd35
 cid: QmdZ5a6v3ZpgWdsAhkUwGHyWD7wspxmgyTBqX72VQNF9cy
