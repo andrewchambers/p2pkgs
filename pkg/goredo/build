@@ -3,7 +3,7 @@ set -eux
 tar -xf *.zst
 rm *.zst
 cd */src
-CGO_ENABLED=0 go build -mod=vendor
+CGO_ENABLED=0 go build -ldflags="-s -w" -mod=vendor
 mkdir "$DESTDIR/bin"
 mv ./goredo "$DESTDIR/bin"
 cd "$DESTDIR/bin"
