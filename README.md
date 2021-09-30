@@ -21,17 +21,23 @@ Install the dependencies:
 - redo[1] to run build rules.
 - [curl](https://curl.se/) to download source tarballs.
 - [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
+- [gnu tar](https://www.gnu.org/software/tar/)[2] used for reproducible tarballs.
+
 
 Optional dependencies:
 
 - [ipfs](https://ipfs.io) used for peer to peer package caches and source mirrors.
 
 
-[1] We aim to support multiple redo implementations:
+[1] We support multiple redo implementations:
 
 - cypherpunks [goredo](http://www.goredo.cypherpunks.ru).
 - apenwarrs [redo](https://github.com/apenwarr/redo).
 - The bundled, but very limited [./bin/do](./bin/do).
+
+They above list is order of preference.
+
+[2] We want help and are working on making the package tree more portable.
 
 ## Building a package
 
@@ -120,7 +126,8 @@ If you want to help our project and mirror all our source dependencies, install 
 Alternatively you can read the cids listed in ./mirrors/ipfs and decide which ones you
 want to mirror.
 
+## More Documentation
 
-## How it works
+For more information about writing packages see the [packaging documentation](./doc/packging.md).
 
-See the [technical documentation](./doc/TECHNICAL.md).
+To see how it all works, check the [technical documentation](./doc/technical.md).
