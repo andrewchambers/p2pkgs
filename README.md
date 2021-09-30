@@ -73,6 +73,14 @@ increases the build speed of cached packages.
 See the [package cache documentation](./doc/packagecaches.md) for
 more information.
 
+### Public package caches
+
+Development package cache by Andrew Chambers:
+
+```
+ipns://k51qzi5uqu5dlbmgpow9z63mgu9kita6zcipmdv63cq0nkyztwx4vzv02dyj02
+```
+
 ## Writing packages
 
 For more information about writing packages see the [packaging documentation](./doc/packaging.md).
