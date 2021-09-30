@@ -1,16 +1,18 @@
 # Packaging
 
-Writing a package is relatively simple and
-follows a few basic steps...
+## Basic packaging steps
 
-- Create a fetch file linking the source code.
+- Create a fetch file describing the source code.
 - Create a build-deps file listing the build dependencies.
 - Create a run-deps file listing the runtime dependencies.
 - Create a build file that actually builds and installs the package.
+- Add the fetch files to an ipfs mirror and the mirror lists.
 
 ## Package Files
 
-## build
+Each package consists of a few files described in this section.
+
+### build
 
 A script run inside the build sandbox that must build the package
 and install it into the staging directory $DESTDIR.
