@@ -1,6 +1,6 @@
 # coolports
 
-A simple, auditable, source based, package system with an optional
+A simple, auditable, source based, package system for linux with an optional
 precompiled package cache and optional p2p mirroring.
 
 ## Key features
@@ -18,26 +18,15 @@ precompiled package cache and optional p2p mirroring.
 Install the dependencies:
 
 - [bwrap](https://github.com/containers/bubblewrap) to run the build sandbox.
-- redo[1] to run build rules.
+- [goredo](http://www.goredo.cypherpunks.ru) or [redo](https://github.com/apenwarr/redo) or the very limited [./bin/do](./bin/do).
 - [curl](https://curl.se/) to download source tarballs.
 - [recutils](https://www.gnu.org/software/recutils) used for the mirror databases.
-- [gnu tar](https://www.gnu.org/software/tar/)[2] used for reproducible tarballs.
-
+- [gnu tar](https://www.gnu.org/software/tar/) used for reproducible tarballs.
 
 Optional dependencies:
 
 - [ipfs](https://ipfs.io) used for peer to peer package caches and source mirrors.
 
-
-[1] We support multiple redo implementations:
-
-- cypherpunks [goredo](http://www.goredo.cypherpunks.ru).
-- apenwarrs [redo](https://github.com/apenwarr/redo).
-- The bundled, but very limited [./bin/do](./bin/do).
-
-They above list is order of preference.
-
-[2] We want help and are working on making the package tree more portable.
 
 ## Building a package
 
