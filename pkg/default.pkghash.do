@@ -6,9 +6,9 @@
 
 set -eu
 
-out="$(realpath $3)"
-pkgdir="$(dirname $(realpath $1))"
-cd $pkgdir
+out="$(realpath "$3")"
+pkgdir="$(dirname $(realpath "$1"))"
+cd "$pkgdir"
 
 rundephashes=""
 builddephashes=""
