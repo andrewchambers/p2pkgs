@@ -31,7 +31,7 @@ Optional dependencies:
 ## Building a package
 
 ```
-./bin/build-packages-ifchanged ./pkg/{make,oksh}
+./bin/build-packages-ifchange ./pkg/{make,oksh}
 ```
 
 or:
