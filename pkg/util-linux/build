@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eux
+tar -xf *.tar.gz
+rm *.tar.gz
+cd *
+./configure --prefix="" \
+  --disable-bash-completion \
+  --disable-makeinstall-chown \
+  --disable-makeinstall-setuid \
+  --disable-nls
+make install-strip
