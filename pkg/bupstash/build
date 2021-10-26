@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eux
+tar -xf *.tar.gz
+rm *.tar.gz
+cargo build --release
+mkdir "$DESTDIR/bin"
+strip target/release/bupstash
+cp target/release/bupstash "$DESTDIR/bin" 
