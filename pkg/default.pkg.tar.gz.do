@@ -14,7 +14,7 @@ cd $pkgdir
 redo-ifchange .pkghash .closure
 redo-ifchange $(cat .closure)
 
-if test -n "${PACKAGE_CACHE_URL:-}"
+if test -n "${PKG_CACHE_URL:-}"
 then
   cachetar="$(cat .pkghash).tar.gz"
   set +e
@@ -35,9 +35,9 @@ then
   esac
 fi
 
-if test "${PKG_FORCE_BINARY_PACKAGES:-}" = "yes"
+if test "${PKG_FORCE_BINARY:-}" = "yes"
 then
-  echo "PKG_FORCE_BINARY_PACKAGES is 'yes' and the binary cache lookup failed" 1>&2
+  echo "PKG_FORCE_BINARY is 'yes' and the binary cache lookup failed" 1>&2
   exit 1
 fi
 

@@ -19,6 +19,7 @@ ipfsget () {
   fi
   # If the cache directory was found, but the file failed,
   # treat as a 404
+  echo "fetching $1" 1>&2
   if ! ipfs get -o "$2" "$1" 2>/dev/null 1>&2
   then
     exit 2
@@ -26,21 +27,21 @@ ipfsget () {
   exit 0
 }
 
-case "$PACKAGE_CACHE_URL" in
+case "$PKG_CACHE_URL" in
   ipfs://*)
     set +e
-    ipfsget "/ipfs/${PACKAGE_CACHE_URL#ipfs://}/$tar" "$out"
+    ipfsget "/ipfs/${PKG_CACHE_URL#ipfs://}/$tar" "$out"
     exit "$?"
   ;;
   ipns://*)
     set +e
-    ipfsget "/ipns/${PACKAGE_CACHE_URL#ipns://}/$tar" "$out"
+    ipfsget "/ipns/${PKG_CACHE_URL#ipns://}/$tar" "$out"
     exit "$?"
   ;;
   *)
     set +e
-    url="$PACKAGE_CACHE_URL/$tar"
-    out="$(curl -s -D - --fail -o "$out" -L "$PACKAGE_CACHE_URL/$tar")"
+    url="$PKG_CACHE_URL/$tar"
+    out="$(curl -s -D - --fail -o "$out" -L "$PKG_CACHE_URL/$tar")"
     rc="$?"
     set -e
     if test "$rc" != "0"

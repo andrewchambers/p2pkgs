@@ -128,6 +128,10 @@ source_url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libca
 sha256: 4ed3d11413fa6c9667e49f819808fbb581cd8864b839f87d7c2a02c70f21d8b4
 cid: QmVyZxZFTB7u6i3bQLpf1NPTm3mVc5bh37saYqxEQhib7o
 
+source_url: https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.2.tar.gz
+sha256: 15db966474e459b33fa390a6b892190a92079a73ca45384cde4c86e6ed265a86
+cid: QmUdrKYAgrRPh6XNZTBzzNvAfetexUhycJym6dakR9qLjU
+
 source_url: https://musl.libc.org/releases/musl-1.2.2.tar.gz
 sha256: 9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd
 cid: QmWotMZZFdS7rPNu3Y58WL1NaVXKLJH195pcvR4oMEdZQE
@@ -163,3 +167,7 @@ cid: QmS8XqdpJ6yUVwpfh9gErE8FjrHx2SFvfUx2ELiWYrK4aP
 source_url: https://www.zlib.net/zlib-1.2.11.tar.gz
 sha256: c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
 cid: QmVUxkKQnLaiWK7nSwMFQ97LYSeGuwtRFjhw9ooMpJd5Gr
+
+source_url: https://github.com/andrewchambers/bupstash/releases/download/v0.10.2/bupstash-v0.10.2-src+deps.tar.gz
+sha256: eaadac9cd6bc993f0bd143de457054eb6572e093783907478968a80dff1a355c
+cid: QmNhS9DR2XXP8gboj2PbeYC6aob17WZVvCgAes5oFdRoeY
