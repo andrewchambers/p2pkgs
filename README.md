@@ -1,4 +1,4 @@
-# coolports
+# p2pkgs
 
 A simple, auditable, source based, package system for linux with an optional
 precompiled package cache and optional p2p mirroring.
